@@ -1,0 +1,131 @@
+﻿FIT2099 Assignment Group: OOPs
+
+
+Group members:
+* Jeng Yang Kong 29903823
+* Ho Yung Sheng 29035619
+
+
+
+
+Design Rationale
+
+
+Zombie
+* bite attack with 50% probability, more damage
+   * modify override getIntrinsicWeapon in Zombie class to instantiate “bite” intrinsic weapon
+   * IntrinsicWeapon(20, "bites"); //20 is damage 
+   * if( new Random().nextDouble() <= 0.02 ) {“bites”} //50% probability
+   * else {“punches”}
+* restore 5 health points to zombie for the successful bite attack
+   * add actor.heal(5) to execute method in attackAction class if Weapon.verb = “bite” attack (actor is zombie)
+   * Validate 
+* zombie pickup weapon near it when turn start
+   * as playturn gets called when each turns start, add pickup method before attack and chase in the playturn method to pick up a weapon when turn starts
+* saying “Braaainss” for 10% chance each turn
+   * get used of Math Random to implement probability
+   * in zombie playturn method, add if( new Random().nextDouble() <= 0.1 ) {saying “Brassssins”}
+
+
+Beating up zombie
+* attack on zombie may knock at least one its limb off
+   * In attackaction class execute method, validate if the target is zombie (if actor.hasCapability(ZombieCapability.UNDEAD)), 25% probability to lose 1-2 arm or leg.
+   * zombie.Arm -1 / zombie.Leg -1
+   * set a new weaponItem (arm or leg) and set it to the ground at zombie current location
+* create a checklimb() method in attackAction class and call it execute method. The argument is a zombie.
+
+
+
+
+* In checkLimb
+   * if arm count is 1(zombie.arm == 1), if getIntrinsicWeapon == “punch”, set the probability halved in attackActionClass’s execute method.
+   * if arm count is 0, drop all weapons to ground on current location (dropItemAction.execute)
+   * if leg count is 1, zombie speed is halved, move every second turn
+      * in zombie class playturn method, look for the lastAction, if last Action has movement then stop moving, else move the zombie
+   * if leg count is 0, zombie cannot move, but still can attack
+
+
+* Create Arm and Leg class
+   * have the int attribute of arms and legs initializing each of the values of 2.
+   * leg char is “L”, arm char is “A”
+   * to fulfill the concept of reusability
+   * Reason to create an arm and leg class is that we can reuse it when other actors like humans, players, and farmers need to implement limb later, we can just reuse the classes and don’t need to repeat the code again, thus again avoiding DRY code. This make the classes portable. 
+   * Arm and leg belong to a portable item which is a subclass of Item.
+* add arm and leg in zombieActor constructor. This creates arms and legs for a zombie at first on creation.
+* Arm and Leg craft to zombie club and mace
+
+
+Human, Player 
+* Has behaviour of wandering and PickupBehaviour
+* PickupBehaviour will enable humans, player to check nearby for pickable items in each play turn and make decision on the item picked up
+* Items such as a dropped zombie leg, zombie arm or a ripen crop can be picked up and stored in their inventory. 
+
+
+PickupBehaviour
+* This class implements the pick up behaviour which humans or players possess.
+* Created this class to verify whether there are any things that can be picked up near the actor, and whether to store, craft or consumed by the player or human. 
+* This constructor takes in displayChar of ‘.’, ‘L’ and ‘A’.
+* . stands for dirt 
+* L stands for zombie arms 
+* A stands for zombie legs
+* It will determine the type of item by looking at displayChar near the location of the current actor by using map.getLocation(actor) which the actor can only be a human or player. 
+* An array will store all items object which can be picked up by the actor at that location at that given turn.
+* With the corresponding displayChar we will call PickupAction class to perform action based on the items we have picked up.
+* A method checkItemOnLocation will be created to populate the array with all pickable items at the location at the given time.
+
+
+PickupAction 
+* This class decides what action to be taken with a list of items which has been picked up by the human or player which pass from PickupBehaviour.
+* This class’s constructor will take in an array of items which have been picked up by the actor which passed from the PickupBehaviour class.
+* If the item picked up is a ripe crop, the player/human can consume it and add health by all calling actor.heal().
+* If the item is a zombie leg or zombie arm, we can add it in the actor’s inventory and use it for crafting when CraftBehaviour is called or used.
+
+
+CraftBehaviour
+* This class implements the craft behaviour which the human and player possess. 
+* It will validate the item which the player wants to craft in their inventory
+* Has a constructor which takes in the player.
+* At the getAction() method, the item in the player's inventory will be validated. If there is a zombie leg in the inventory, a new weaponItem will be initialized which is zombie mace with its hitpoint and verb. Then this newly created weapon will be added into the player’s inventory. If the item was a zombie arm, a new weaponItem will be initialized which is a zombie club with its own hitpoint and verb. 
+* CraftAction will be called to create a new WeaponItem based on the item in the player inventory which has been checked and validated in the getAction() method. 
+CraftAction
+* It has a constructor which takes in an item object from the player inventory and make that object a weapon object by creating a new WeaponItem in a newly created craft() method
+* This class will create a new WeaponItem in the craft() method. 
+,
+Farmer
+* Farmer is an extend of ZombieActor
+* By default farmer has a hitpoint of 50, displayChar of ‘F’ and belong to team ZombieCapability.ALIVE
+* All farmers by default have two behaviours which are wandering and farming, a new FarmingBehaviour() class which implements Behaviour, has been created to enable crop sowing.
+* Three farmers will be created in the Application class which is Bill, Yusof and Hadi
+* Added farmingBehaviour class which implements Behaviour
+
+
+FarmBehaviour
+* This class a target variables, with type dirt
+* Dirt, the farmer will make any Dirt object as its target.The dirt might be a crop or a ripe crop which totally depend on the status of the dirt.
+* Both player and farmer will implement this behaviour as both of them could harvest food.
+* On the getAction() method, create an ArrayList which holds all dirt objects near the farmer or player which the location of the dirt object can be found as below.
+* The player or farmer’s current location can be obtained by using map.locationOf(actor). By using the x and y value which we have obtained, if x - 1, y - 1,  x + 1,  y + 1 (y -1, x - 1), (y + 1, x - 1), (y + 1, x + 1), (y - 1, x + 1) or (x, y) location on the map has a display char of ‘.’, then  dirt’s location will be stored in an array, the farmer will perform an action on the dirt in the array on the location by calling a newly created class which is FarmAction() class which is a subclass of the Action() class.
+
+
+FarmAction
+* In the the FarmAction class, a variable target is created with type Dirt
+* The constructor takes in a Dirt parameter and sets the target to the current Dirt object being worked on..
+* The probability of a dirt becoming a crop will be implemented in this class. It will determine whether the dirt has been successfully sowed to a crop by the farmer.
+* Players and humans can only harvest ripe crops., while farmers can sow fertilise and harvest.
+* Boolean crop and boolean ripe has been added into the Dirt class.
+* Boolean crop = false, indicate that there is no crop on the dirt; crop = true indicate there is a crop on the dirt.\
+* Boolean ripe = false , indicate that the crop is not ripe; ripe = true indicate that the crop is ripe
+* Ripe can only be true if and only if the crop is true.
+* If the dirt is not a crop, the farmer can sow a crop and turn the boolean crop to true.
+* If the dirt is already a crop, the farmer will fertilize it instead of sowing a crop onto a dirt and the dirt’s ripe time will be 10 turns.
+* If the boolean crop and boolean ripe is true, it indicates that the dirt is a crop and it is ripe, therefore, the crop can be harvested by the farmer, human or player.
+* Dirt object will be called to check its status in each turn by looking at its Boolean value.
+
+
+Dirt 
+* Three Boolean values added
+* Boolean crop; indicate if the dirt has become a crop.
+* Boolean ripe; indicate if the crop has ripe or not, possible to be true if and only if crop is true.
+* Boolean fertilised; indicate if the crop had been fertilised or not.;possible to be true if and only if crop is true and ripe is false.
+* After 20 turns the value of ripe will become true given that the boolean value of crop is true also. 
+* Reduce ripe turn by 10 if the farmer has fertilised it.

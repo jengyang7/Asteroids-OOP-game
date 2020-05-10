@@ -1,0 +1,52 @@
+﻿FIT2099 Assignment Group: OOPs
+
+
+Group members:
+* Jeng Yang Kong 29903823
+* Ho Yung Sheng 29035619
+
+
+
+
+Work Breakdown Agreement
+
+
+
+
+Jeng Yang
+* Design and Implement Zombie Functionality
+   * Zombie attacks
+      * zombie bite implementation
+      * restore 5 health point for zombie when biting
+      * pickup weapon near zombie when turn starts
+      * 10% chance of saying “Braaaains”
+   * Beating up the zombies
+      * 25% chance of losing limbs when get attacked
+      * Create leg and arm for zombie
+      * Attack and movement changes when losing limbs 
+* Draw the Class Diagram
+
+
+Yung Sheng
+* Design and Implement Farmer and Human Functionality 
+      - Player harvest food, farmer sow, fertilize and harvest food
+      - Player, Human pick up item behavior, action towards the item, such as changing zombie leg to zombie mace or zombie arm to zombie clubs.
+
+
+Assignment 1 date
+
+
+Task
+	Date
+	Task assign
+	6th May 2020
+	Design
+	7th May 2020
+	Review
+	10th May 2020
+	
+
+
+
+Agreement
+Jeng Yang: I accept this WBA.
