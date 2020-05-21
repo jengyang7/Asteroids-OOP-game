@@ -6,7 +6,6 @@ import edu.monash.fit2099.interfaces.GroundInterface;
  * Class representing terrain type
  */
 public abstract class Ground implements GroundInterface, Capable, Printable {
-
 	private Capabilities capabilities = new Capabilities();
 	protected char displayChar;
 
