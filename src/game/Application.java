@@ -66,7 +66,6 @@ public class Application {
 		}
 		
 		String[] farmers = {"Yusof", "Johnny", "Matt", "Harry"};
-		
 		for (String name: farmers) {
 			do {
 				x = (int) Math.floor(Math.random() * 20.0 + 30.0);
