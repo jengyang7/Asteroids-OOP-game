@@ -13,62 +13,78 @@ public class Dirt extends Ground {
 	private boolean isACrop;
 	private boolean riped;
 	private boolean fertilised;
-	
+	private boolean food;
 
 	public Dirt() {
 		super('.');
 		this.isACrop = false;
 		this.riped = false;
 		this.fertilised = false;
-		
+		this.food = false;
 	}
 	
 	
-	public boolean sow(){
+	public String sow(){
 		
 		//Generate probability for sowing crop from 0 - 1 (exclusive 1)
 		double probability = Math.random();
 		
-		if (this.isACrop && !this.riped) {
-			System.out.println("This is already a crop!");
-			return false;
-		}
-		else if (!this.isACrop && probability < 0.33 && !this.riped) {
+		if (probability < 0.33) {
+			this.isACrop = true;
+			this.riped = false;
+			this.fertilised = false;
 			super.displayChar = 'C';
-			System.out.println("Successfully sowed a crop!");
-			return true;
+			return ("Successfully sowed a crop!");
 			
 		}
-		return false;
+		this.isACrop = false;
+		this.riped = false;
+		this.fertilised = false;
+		return ("Sow unsuccessful!");
 		
 	}
 	
 	public void reduceTurn() {
-		if (this.isACrop && this.turn <= 0 && !this.riped) {
-			this.isACrop = false;
-			this.fertilised = false;
-			this.riped = true;
-			super.displayChar = 'F';
-			
-		}else {
+		if (!this.riped) {
 			this.turn -= 1;
+			if (this.turn <= 0) {
+				this.isACrop = false;
+				this.fertilised = false;
+				this.riped = true;
+			}
 		}
 	}
 	
-	public void fertilised() {
-		if (this.isACrop && !this.fertilised && !this.riped && this.turn > 0){
-			this.turn -= 10;
-			this.fertilised = true;
+	public String fertilised() {
+	
+		this.turn -= 10;
+		this.fertilised = true;
+		return ("Successfully fertilise a crop!");
 		}
 		
+
+	
+	public void changeFood() {
+		this.isACrop = false;
+		this.fertilised = false;
+		this.riped = false;
+		this.food = true;
+		super.displayChar = 'f';
 	}
 	
-	public boolean isFood() {
-		if (this.riped) {
-			return true;
-		}
-		return false;
+
+	public boolean retIsACrop() {
+		return this.isACrop;
 	}
+	
+	public boolean retFertilised() {
+		return this.fertilised;
+	}
+	
+	public boolean retRiped() {
+		return this.riped;
+	}
+
 	
 	
 }
