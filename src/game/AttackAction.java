@@ -36,9 +36,16 @@ public class AttackAction extends Action {
 	public String execute(Actor actor, GameMap map) {
 
 		Weapon weapon = actor.getWeapon();
-
-		if (rand.nextBoolean()) {
-			return actor + " misses " + target + ".";
+		
+		if (weapon.verb().equals("bites")){
+			if( Math.random() <= 0.75 ) {
+				missAttack(actor, target);
+			}
+		}
+		else {
+			if (rand.nextBoolean()) {
+				missAttack(actor, target);
+			}
 		}
 
 		int damage = weapon.damage();
@@ -66,4 +73,9 @@ public class AttackAction extends Action {
 	public String menuDescription(Actor actor) {
 		return actor + " attacks " + target;
 	}
+	
+	public String missAttack(Actor actor, Actor target) {
+		return actor + " misses " + target + ".";
+	}
+		
 }
