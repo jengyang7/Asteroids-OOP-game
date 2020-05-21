@@ -40,6 +40,9 @@ public class AttackAction extends Action {
 		if (weapon.verb().equals("bites")){
 			if( Math.random() <= 0.75 ) {
 				missAttack(actor, target);
+				if (actor.hasCapability(ZombieCapability.UNDEAD)){
+					actor.heal(5);
+				}
 			}
 		}
 		else {
