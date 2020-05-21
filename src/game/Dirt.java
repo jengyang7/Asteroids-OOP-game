@@ -23,7 +23,6 @@ public class Dirt extends Ground {
 		this.food = false;
 	}
 	
-	
 	public String sow(){
 		
 		//Generate probability for sowing crop from 0 - 1 (exclusive 1)
