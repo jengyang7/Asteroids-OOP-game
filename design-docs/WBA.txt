@@ -52,13 +52,13 @@ Task
 	Date
 	Discuss Implementation
 	11th May 2020
-	Review
+	Review specification for Assignment 2
 	13-22th May 2020
-	Testing
+	Testing and made some changes
 	22th May 2020
 
 
 
 Agreement
 Jeng Yang: I accept this WBA.
-Ho Yung Sheng: I accept this WBA≥
+Ho Yung Sheng: I accepted this WBA≥
