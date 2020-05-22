@@ -39,8 +39,9 @@ public class AttackAction extends Action {
 		
 		if (weapon.verb().equals("bites")){
 			if( Math.random() <= 0.75 ) {
-				missAttack(actor, target);
+				return missAttack(actor, target);
 				
+			}else {
 				if (actor.hasCapability(ZombieCapability.UNDEAD)){
 					actor.heal(5);
 				}
@@ -48,9 +49,21 @@ public class AttackAction extends Action {
 		}
 		else {
 			if (rand.nextBoolean()) {
-				missAttack(actor, target);
+				return missAttack(actor, target);
 			}
 		}
+		
+		// Zombie has 25% probability to loose one limb if get attacked
+		if( Math.random() <= 0.25 && actor.hasCapability(ZombieCapability.UNDEAD)){
+			
+			for (Item item : actor.getInventory()) {
+				if(item.hasCapability(WeaponCapability.WEAPON)) {
+					item.getDropAction().execute(actor, map);	
+					break;	//after lose one limb, break
+				}
+			}				
+		}
+				
 
 		int damage = weapon.damage();
 		String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
