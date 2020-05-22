@@ -63,6 +63,35 @@ public class AttackAction extends Action {
 				}
 			}				
 		}
+		
+		
+		//If Zombie losing Limb, make movement and attack changes to zombie
+		int armCount = 0;
+		int legCount = 0;
+
+		
+		for (Item item : actor.getInventory()) {
+			if(item.hasCapability(WeaponCapability.WEAPON)){ 
+				if (item.hasCapability(LimbCapability.ARM)){
+					armCount++;
+				}else if (item.hasCapability(LimbCapability.LEG)) {
+					legCount++;
+					}
+				}
+			}
+		
+		if (armCount == 0) {
+			//drop any item it holding
+		}
+			else if (armCount == 1) {
+			//probability of punching is halved
+		}
+			else if (legCount == 0) {
+			//cannot
+		}	
+			else if (legCount == 1) {
+			//movement speed halved
+		}
 				
 
 		int damage = weapon.damage();
