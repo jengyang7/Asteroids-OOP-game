@@ -45,6 +45,17 @@ Task
 	Review
 	10th May 2020
 	
+Assignment 2 date
+
+
+Task
+	Date
+	Discuss Implementation
+	11th May 2020
+	Review
+	13-22th May 2020
+	Testing
+	22th May 2020
 
 
 
