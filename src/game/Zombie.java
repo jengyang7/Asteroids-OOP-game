@@ -17,6 +17,7 @@ import edu.monash.fit2099.engine.IntrinsicWeapon;
  */
 public class Zombie extends ZombieActor {
 	private Behaviour[] behaviours = {
+			new ScreamBehaviour("braaaains"),
 			new AttackBehaviour(ZombieCapability.ALIVE),
 			new HuntBehaviour(Human.class, 10),
 			new WanderBehaviour()
@@ -24,6 +25,10 @@ public class Zombie extends ZombieActor {
 
 	public Zombie(String name) {
 		super(name, 'Z', 100, ZombieCapability.UNDEAD);
+		this.addItemToInventory(new Leg("leg1", 'L'));
+		this.addItemToInventory(new Leg("leg2", 'L'));
+		this.addItemToInventory(new Leg("arm1", 'A'));
+		this.addItemToInventory(new Leg("arm2", 'A'));
 	}
 	
 
