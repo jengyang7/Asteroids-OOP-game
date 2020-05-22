@@ -15,24 +15,40 @@ public class FarmBehaviour implements Behaviour {
 
 	@Override
 	public Action getAction(Actor actor, GameMap map) {
+		
 		List <Exit> exits = new ArrayList<Exit>(map.locationOf(actor).getExits());
 		Collections.shuffle(exits);
 		
-		for (Exit e: exits) {
-			if (!(e.getDestination().getDisplayChar() == '.' || !(e.getDestination().getDisplayChar() == 'C'))){
-				continue;
-			}
-			if ((e.getDestination().getDisplayChar() == '.') || (e.getDestination().getDisplayChar() == 'C')){
-				if (e.getDestination().getGround() instanceof Dirt) {
-					return new FarmAction((Dirt) e.getDestination().getGround());
+		if (actor.getDisplayChar() == 'F') {
+			for (Exit e: exits) {
+				if (!(e.getDestination().getDisplayChar() == '.') || !(e.getDestination().getDisplayChar() == 'C')){	
+					continue;
+				}
+				
+				if ((e.getDestination().getDisplayChar() == '.') || (e.getDestination().getDisplayChar() == 'C') || (e.getDestination().getDisplayChar() == 'f')){
 					
-				}else {
-					e.getDestination().setGround(new Dirt());
-					return new FarmAction((Dirt) e.getDestination().getGround());
+					if (e.getDestination().getGround() instanceof Dirt) {
+						return new FarmAction((Dirt) e.getDestination().getGround());
+						
+					}else {
+						e.getDestination().setGround(new Dirt());
+						return new FarmAction((Dirt) e.getDestination().getGround());
 					}
 				}
 			}
-		
-		return null;
+			
+		}else if (actor.getDisplayChar() == 'H') {
+			for (Exit e: exits) {
+				if (e.getDestination().getDisplayChar() != 'f') {
+					continue;
+					
+				}else if (e.getDestination().getDisplayChar() == 'f') {
+					return new FarmAction((Dirt) e.getDestination().getGround());
+					
+				}
+			}
+			
 		}
+		return null;
 	}
+}

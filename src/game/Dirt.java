@@ -6,7 +6,7 @@ import java.lang.Math;
 /**
  * A class that represents bare dirt.
  */
-public class Dirt extends Ground {
+public class Dirt extends Ground{
 	
 	
 	private int turn = 20;
@@ -32,6 +32,7 @@ public class Dirt extends Ground {
 			this.isACrop = true;
 			this.riped = false;
 			this.fertilised = false;
+			this.food = false;
 			super.displayChar = 'C';
 			return ("Successfully sowed a crop!");
 			
@@ -82,6 +83,10 @@ public class Dirt extends Ground {
 	
 	public boolean retRiped() {
 		return this.riped;
+	}
+	
+	public boolean retFood() {
+		return this.food;
 	}
 
 	

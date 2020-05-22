@@ -12,7 +12,7 @@ import edu.monash.fit2099.engine.GameMap;
  * or run away and hide.  Each implementation of Behaviour returns an Action that the 
  * Actor could take to achieve its objective, or null if no useful options are available.
  * 
- * An Actor's playTurn() method can use Behaviours to help decide which Action to 
+ * An Actor's playTurn() method can use Behaviors to help decide which Action to 
  * perform next.  It can also simply create Actions itself, but using Behaviours allows
  * us to modularize the code that decides what to do, and that means that it can be 
  * reused if (e.g.) more than one kind of Actor needs to be able to seek, follow, or hide.
@@ -25,7 +25,7 @@ public interface Behaviour {
 	/**
 	 * A factory for creating actions. 
 	 *
-	 * A Behaviour represents a kind of objective that an Actor can have.  For example
+	 * A Behavior represents a kind of objective that an Actor can have.  For example
 	 * it might want to seek out a particular kind of object, or follow another Actor, 
 	 * or run away and hide.  Each implementation of Behaviour returns an Action that the 
 	 * Actor could take to achieve its objective, or null if no useful options are available.
