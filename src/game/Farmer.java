@@ -6,17 +6,12 @@ import edu.monash.fit2099.engine.Display;
 import edu.monash.fit2099.engine.DoNothingAction;
 import edu.monash.fit2099.engine.GameMap;
 
-public class Farmer extends ZombieActor {
+public class Farmer extends Human {
 	
 	private Behaviour[] behaviour = {new FarmBehaviour(), new WanderBehaviour()};
 	
 	public Farmer(String name) {
-		super(name, 'F', 50, ZombieCapability.ALIVE);
-	}
-
-	public Farmer(String name, char displayChar, int hitPoints, ZombieCapability team) {
-		super(name, displayChar, hitPoints, team);
-		// TODO Auto-generated constructor stub
+		super(name, 'F', 50);
 	}
 
 	@Override
