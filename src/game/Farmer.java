@@ -8,7 +8,7 @@ import edu.monash.fit2099.engine.GameMap;
 
 public class Farmer extends ZombieActor {
 	
-	private Behaviour[] behaviour = {new FarmBehaviour()};
+	private Behaviour[] behaviour = {new FarmBehaviour(), new WanderBehaviour()};
 	
 	public Farmer(String name) {
 		super(name, 'F', 50, ZombieCapability.ALIVE);
