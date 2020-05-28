@@ -4,7 +4,9 @@ import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actions;
 import edu.monash.fit2099.engine.Display;
 import edu.monash.fit2099.engine.GameMap;
+import edu.monash.fit2099.engine.Item;
 import edu.monash.fit2099.engine.Menu;
+import edu.monash.fit2099.engine.Weapon;
 
 /**
  * Class representing the Player.
@@ -23,7 +25,15 @@ public class Player extends Human {
 	public Player(String name, char displayChar, int hitPoints) {
 		super(name, displayChar, hitPoints);
 	}
-
+	
+//	public Weapon getWeapon() {
+//		for (Item item : inventory) {
+//			if (item.asWeapon() != null && item.hasCapability(WeaponCapability.WEAPON))
+//				return item.asWeapon();
+//		}
+//		return getIntrinsicWeapon();
+//	}
+	
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
 		// Handle multi-turn Actions

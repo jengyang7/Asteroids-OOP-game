@@ -35,7 +35,10 @@ public class AttackAction extends Action {
 	@Override
 	public String execute(Actor actor, GameMap map) {
 
+		
+		
 		Weapon weapon = actor.getWeapon();
+		
 		
 		if (weapon.verb().equals("bites")){
 			if( Math.random() <= 0.75 ) {
@@ -53,46 +56,28 @@ public class AttackAction extends Action {
 			}
 		}
 		
-		// Zombie has 25% probability to loose one limb if get attacked
+		 //Zombie has 25% probability to loose one limb if get attacked
 		if( Math.random() <= 0.25 && actor.hasCapability(ZombieCapability.UNDEAD)){
 			
 			for (Item item : actor.getInventory()) {
 				if(item.hasCapability(WeaponCapability.WEAPON)) {
-					item.getDropAction().execute(actor, map);	
+					if (item.hasCapability(LegCounter.ONE) ||item.hasCapability(LegCounter.TWO) 
+							|| item.hasCapability(ArmCounter.ONE) || item.hasCapability(ArmCounter.TWO))
+					item.getDropAction().execute(actor, map);
+					
+					if (item.hasCapability(ArmCounter.ONE) && (Math.random() <= 0.5)) {
+						for (Item item1 : actor.getInventory()) {
+							if(item1.hasCapability(WeaponCapability.WEAPON)) {
+								item1.getDropAction().execute(actor, map);}
+							break;
+						}
+					}
+					
 					break;	//after lose one limb, break
 				}
 			}				
 		}
 		
-		
-		//If Zombie losing Limb, make movement and attack changes to zombie
-		int armCount = 0;
-		int legCount = 0;
-
-		
-		for (Item item : actor.getInventory()) {
-			if(item.hasCapability(WeaponCapability.WEAPON)){ 
-				if (item.hasCapability(LimbCapability.ARM)){
-					armCount++;
-				}else if (item.hasCapability(LimbCapability.LEG)) {
-					legCount++;
-					}
-				}
-			}
-		
-		if (armCount == 0) {
-			//drop any item it holding
-		}
-			else if (armCount == 1) {
-			//probability of punching is halved
-		}
-			else if (legCount == 0) {
-			//cannot
-		}	
-			else if (legCount == 1) {
-			//movement speed halved
-		}
-				
 
 		int damage = weapon.damage();
 		String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
@@ -105,7 +90,7 @@ public class AttackAction extends Action {
 			Actions dropActions = new Actions();
 			for (Item item : target.getInventory())
 				dropActions.add(item.getDropAction());
-			for (Action drop : dropActions)		
+			for (Action drop : dropActions)		 
 				drop.execute(target, map);
 			map.removeActor(target);	
 			
