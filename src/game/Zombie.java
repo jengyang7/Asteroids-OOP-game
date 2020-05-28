@@ -79,11 +79,18 @@ public class Zombie extends ZombieActor {
 
 			
 				if (action != null) {
-					String[] words = action.menuDescription(this).split(" ") ;
-					if (words[1].equals("moves")) {
+					String[] currentActionWord = action.menuDescription(this).split(" ") ;
+					if (currentActionWord[1].equals("moves")) {
 						for (Item item : this.getInventory()) {
-							if (item.hasCapability(LegCounter.ONE)) {
+							if (item.hasCapability(LegCounter.ZERO)) {
 								break;
+								
+								}
+							else if (item.hasCapability(LegCounter.ONE)) {
+								String[] lastActionWord = lastAction.menuDescription(this).split(" ") ;
+								if (lastActionWord[1].equals("moves")) {
+									break;
+									}
 								}
 							}
 					}else {
