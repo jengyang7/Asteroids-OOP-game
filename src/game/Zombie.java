@@ -28,8 +28,8 @@ public class Zombie extends ZombieActor {
 
 	public Zombie(String name) {
 		super(name, 'Z', 100, ZombieCapability.UNDEAD);
-		this.addItemToInventory(new Leg("leg", 'L', 5, "", WeaponCapability.ITEM, LegCounter.TWO));
-		this.addItemToInventory(new Arm("arm", 'A', 5, "", WeaponCapability.ITEM, ArmCounter.TWO));
+		this.addItemToInventory(new Leg("leg", 'L', 5, "attack (with leg)", WeaponCapability.ITEM, LegCounter.TWO));
+		this.addItemToInventory(new Arm("arm", 'A', 5, "attack (with arm)", WeaponCapability.ITEM, ArmCounter.TWO));
 	}
 	
 
@@ -41,6 +41,7 @@ public class Zombie extends ZombieActor {
 		for (Item item : this.getInventory()) {
 				if (item.hasCapability(ArmCounter.ONE)) {
 						  //probability of punching is halved
+						System.out.println("1 arm!");
 						probability = probability/2;
 				}
 					}
@@ -74,29 +75,32 @@ public class Zombie extends ZombieActor {
 	 */
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
-		for (Behaviour behaviour : behaviours) {
+		loop1: for (Behaviour behaviour : behaviours) {
 			Action action = behaviour.getAction(this, map);
-
 			
 				if (action != null) {
-					String[] currentActionWord = action.menuDescription(this).split(" ") ;
+					
+					for (Item item : this.getInventory()) {
+						if (item.hasCapability(LegCounter.ZERO)) {
+							System.out.println("0 leg!");
+						}
+						}
+					
+					String[] currentActionWord = action.menuDescription(this).split(" ");
 					if (currentActionWord[1].equals("moves")) {
 						for (Item item : this.getInventory()) {
-							if (item.hasCapability(LegCounter.ZERO)) {
-								break;
-								
-								}
-							else if (item.hasCapability(LegCounter.ONE)) {
+							if (item.hasCapability(LegCounter.ONE)) {
 								String[] lastActionWord = lastAction.menuDescription(this).split(" ") ;
 								if (lastActionWord[1].equals("moves")) {
-									break;
+									continue loop1;
 									}
 								}
 							}
-					}else {
-					return action;
 					}
+					return action;
 				}
+			
+			
 			}
 	
 	return new DoNothingAction();	

@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Exit;
 import edu.monash.fit2099.engine.GameMap;
+import edu.monash.fit2099.engine.Item;
 import edu.monash.fit2099.engine.Location;
 
 /**
@@ -90,6 +91,11 @@ public class HuntBehaviour implements Behaviour {
 
 	@Override
 	public Action getAction(Actor actor, GameMap map) {
+		for (Item item : actor.getInventory()) {
+			if (item.hasCapability(LegCounter.ZERO)) {
+				return null;
+				}
+			}
 		return hunt(actor, map.locationOf(actor));
 	}
 
