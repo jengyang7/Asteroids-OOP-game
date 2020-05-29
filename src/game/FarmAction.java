@@ -7,48 +7,39 @@ import edu.monash.fit2099.engine.Ground;
 
 public class FarmAction extends Action {
 	
-	protected Dirt target;
+	protected Crop target;
 	
 	
-	public FarmAction(Dirt dirt) {
-		this.target = dirt;
+	public FarmAction(Crop crop) {
+		this.target = crop;
 	}
 
-	
-	
 	@Override
 	public String execute(Actor actor, GameMap map) {
-		String result;
-		
-		
+		String result = "";
 		if (actor.getDisplayChar() == 'F') {
-			
-			//Sow a crop on a dirt
-			if (target.retIsACrop() == false && target.retRiped() == false) {
-				result = target.sow();
+			if (target.retFertilised() == false) {
+				target.fertilised();
+				result = actor.toString() + " fertilised a crop";
 				return result;
 			}
 			
-			//Fertilize a non fertilized crop 
-			if (target.retIsACrop() == true && target.retFertilised() == false) {
-				result = target.fertilised();
-				return result;
-			}
-			
-			//Change the crop to a food
-			if (target.retRiped() == true){
+			if (target.retRiped() == true) {
 				target.changeFood();
-				result = "This crop is a food now!";
+				result =  actor.toString() + " harvested a ripe crop, it became food and dropped on ground";
 				return result;
 			}
+
 			
 		}else if (actor.getDisplayChar() == 'H') {
-			if(target.retRiped() == true) {
-				target = new Dirt();
-				actor.addItemToInventory(new Food("Food", 'f', FoodCapability.Food));
+			if (target.retFood() == true) {
+				actor.addItemToInventory(new Food());
+				map.locationOf(actor).setGround(new Dirt());
+				result = actor.toString() + " had harvested the food and placed into their inventory";
+				return result;
 			}
 		}
-		return null;
+		return actor.toString() + " did not made any farming/harvest action in tis turn";
 	}
 
 	

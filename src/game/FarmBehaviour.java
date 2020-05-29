@@ -21,34 +21,34 @@ public class FarmBehaviour implements Behaviour {
 		
 		if (actor.getDisplayChar() == 'F') {
 			for (Exit e: exits) {
-				if (!(e.getDestination().getDisplayChar() == '.') || !(e.getDestination().getDisplayChar() == 'C')){	
-					continue;
-				}
-				
-				if ((e.getDestination().getDisplayChar() == '.') || (e.getDestination().getDisplayChar() == 'C') || (e.getDestination().getDisplayChar() == 'f')){
-					
-					if (e.getDestination().getGround() instanceof Dirt) {
-						return new FarmAction((Dirt) e.getDestination().getGround());
-						
+				if (e.getDestination().getGround() instanceof Dirt) {
+					double probability = Math.random();		
+					if (probability < 0.33) {
+						e.getDestination().setGround(new Crop());
+						System.out.println(actor.toString() +" sowed a crop");
+						return null;
 					}else {
-						e.getDestination().setGround(new Dirt());
-						return new FarmAction((Dirt) e.getDestination().getGround());
+						System.out.println(actor.toString() + " failed to sow a crop");
+						return null;
 					}
 				}
-			}
-			
-		}else if (actor.getDisplayChar() == 'H') {
+					
+				if (e.getDestination().getGround() instanceof Crop) {
+					return new FarmAction((Crop) e.getDestination().getGround());
+					}
+				
+				continue;
+				
+				}
+				
+		}else if (actor.getDisplayChar() == 'H' || actor.getDisplayChar() == '@') {
 			for (Exit e: exits) {
-				if (e.getDestination().getDisplayChar() != 'f') {
-					continue;
-					
-				}else if (e.getDestination().getDisplayChar() == 'f') {
-					return new FarmAction((Dirt) e.getDestination().getGround());
-					
+				if (e.getDestination().getGround() instanceof Crop) {
+					return new FarmAction((Crop) e.getDestination().getGround());
+					}
+				continue;
 				}
 			}
-			
-		}
 		return null;
+		}
 	}
-}
