@@ -16,16 +16,6 @@ public class Crop extends Ground {
 		this.turn = 20;
 	}
 	
-		
-	public void reduceTurn() {
-		if (!this.riped) {
-			this.turn -= 1;
-			if (this.turn <= 0) {
-				this.fertilised = false;
-				this.riped = true;
-			}
-		}
-	}
 	
 	//Reduce ripe time by 10 turn
 	public void fertilised() {
