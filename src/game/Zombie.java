@@ -28,8 +28,8 @@ public class Zombie extends ZombieActor {
 
 	public Zombie(String name) {
 		super(name, 'Z', 100, ZombieCapability.UNDEAD);
-		this.addItemToInventory(new Leg("leg", 'L', 5, "attack (with leg)", WeaponCapability.ITEM, LegCounter.TWO));
-		this.addItemToInventory(new Arm("arm", 'A', 5, "attack (with arm)", WeaponCapability.ITEM, ArmCounter.TWO));
+		this.addItemToInventory(new Leg("leg", 'L', 15, "attack (with leg)", WeaponCapability.ITEM, LegCounter.TWO));
+		this.addItemToInventory(new Arm("arm", 'A', 20, "attack (with arm)", WeaponCapability.ITEM, ArmCounter.TWO));
 	}
 	
 

@@ -135,7 +135,8 @@ public class AttackAction extends Action {
 
 		target.hurt(damage);
 		if (!target.isConscious()) {
-			Item corpse = new PortableItem("dead " + target, '%');
+			
+			Corpse corpse = new Corpse("dead " + target, '%', target.toString(), target);
 			map.locationOf(target).addItem(corpse);
 			
 			Actions dropActions = new Actions();
@@ -167,23 +168,23 @@ public class AttackAction extends Action {
 		
 	public void addLimb(Item item) {
 		if (item.hasCapability(LegCounter.TWO)) {
-			target.addItemToInventory(new Leg("leg", 'L', 5, "attack (with leg)", WeaponCapability.ITEM, LegCounter.ONE));
+			target.addItemToInventory(new Leg("leg", 'L', 15, "attack (with leg)", WeaponCapability.ITEM, LegCounter.ONE));
 			System.out.println("aaa");
 
 		}
 		else if (item.hasCapability(LegCounter.ONE)) {
-			target.addItemToInventory(new Leg("leg", 'L', 5, "attack (with leg)", WeaponCapability.ITEM, LegCounter.ZERO));
+			target.addItemToInventory(new Leg("leg", 'L', 15, "attack (with leg)", WeaponCapability.ITEM, LegCounter.ZERO));
 			System.out.println("bbb");
 
 		}
 		else if (item.hasCapability(ArmCounter.TWO)) {
-			target.addItemToInventory(new Arm("leg", 'L', 5, "attack (with arm)", WeaponCapability.ITEM, ArmCounter.ONE));
+			target.addItemToInventory(new Arm("leg", 'L', 20, "attack (with arm)", WeaponCapability.ITEM, ArmCounter.ONE));
 			System.out.println("ccc");
 
 			
 		}
 		else if (item.hasCapability(ArmCounter.ONE)) {
-			target.addItemToInventory(new Arm("leg", 'L', 5, "attack (with arm)", WeaponCapability.ITEM, ArmCounter.ZERO));
+			target.addItemToInventory(new Arm("leg", 'L', 20, "attack (with arm)", WeaponCapability.ITEM, ArmCounter.ZERO));
 			System.out.println("ddd");
 
 		}
