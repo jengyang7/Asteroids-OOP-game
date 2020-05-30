@@ -14,7 +14,7 @@ import edu.monash.fit2099.engine.GameMap;
  *
  */
 public class Human extends ZombieActor {
-	private Behaviour[] behaviour = {new FarmBehaviour(), new WanderBehaviour()};
+	private Behaviour[] behaviour = {new FarmBehaviour(), new WanderBehaviour(), new CraftBehaviour()};
 
 	/**
 	 * The default constructor creates default Humans

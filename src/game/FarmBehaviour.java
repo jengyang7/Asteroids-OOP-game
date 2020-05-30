@@ -21,6 +21,8 @@ public class FarmBehaviour implements Behaviour {
 		
 		if (actor.getDisplayChar() == 'F') {
 			for (Exit e: exits) {
+				
+				//Sow a crop onto the ground if it is a Dirt, 33% chance of sowing a crop. Show failed to sow if farmer fail to sow a crop
 				if (e.getDestination().getGround() instanceof Dirt) {
 					double probability = Math.random();		
 					if (probability < 0.33) {
@@ -32,7 +34,8 @@ public class FarmBehaviour implements Behaviour {
 						return null;
 					}
 				}
-					
+				
+				//If it is already a crop, the farmer will choose to fertilise or harvest depend on the status of the crop.
 				if (e.getDestination().getGround() instanceof Crop) {
 					return new FarmAction((Crop) e.getDestination().getGround());
 					}
@@ -40,7 +43,8 @@ public class FarmBehaviour implements Behaviour {
 				continue;
 				
 				}
-				
+		
+		//If it is a player or human that encounter a crop, they can only collect and store harvested crop by the farmer in their inventory. Else, do nothing
 		}else if (actor.getDisplayChar() == 'H' || actor.getDisplayChar() == '@') {
 			for (Exit e: exits) {
 				if (e.getDestination().getGround() instanceof Crop) {

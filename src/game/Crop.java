@@ -17,13 +17,14 @@ public class Crop extends Ground {
 	}
 	
 	
-	//Reduce ripe time by 10 turn
+	//Method used to fertilize the crop by the farmer
 	public void fertilised() {
 	
 		this.turn -= 10;
 		this.fertilised = true;
 		}
-		
+	
+	//Method used to harvest the food by the farmer
 	public void changeFood() {
 		this.fertilised = false;
 		this.riped = false;
@@ -31,14 +32,17 @@ public class Crop extends Ground {
 		super.displayChar = 'f';
 	}
 	
+	//Return true if the crop has been fertilized by the farmer
 	public boolean retFertilised() {
 		return this.fertilised;
 	}
 	
+	//Return true if the crop is ripped and ready to be harvested by the farmer.
 	public boolean retRiped() {
 		return this.riped;
 	}
 	
+	//Return true if the crop has been harvested by the farmer and ready to be collected by the player or human.
 	public boolean retFood() {
 		return this.food;
 	}

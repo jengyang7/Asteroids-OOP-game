@@ -17,6 +17,8 @@ public class FarmAction extends Action {
 	@Override
 	public String execute(Actor actor, GameMap map) {
 		String result = "";
+		
+		//A farmer will fertilise a crop if the crop haven't been fertilized beforehand. Farmer will harvest the crop if the crop is ripped.
 		if (actor.getDisplayChar() == 'F') {
 			if (target.retFertilised() == false) {
 				target.fertilised();
@@ -30,8 +32,8 @@ public class FarmAction extends Action {
 				return result;
 			}
 
-			
-		}else if (actor.getDisplayChar() == 'H') {
+		//If the current actor is a human or a player, they can place a harvested food into their inventory.
+		}else if (actor.getDisplayChar() == 'H' || actor.getDisplayChar() == '@') {
 			if (target.retFood() == true) {
 				actor.addItemToInventory(new Food());
 				map.locationOf(actor).setGround(new Dirt());
@@ -39,7 +41,7 @@ public class FarmAction extends Action {
 				return result;
 			}
 		}
-		return actor.toString() + " did not made any farming/harvest action in tis turn";
+		return actor.toString() + " did not made any farming/harvest action in this turn";
 	}
 
 	
