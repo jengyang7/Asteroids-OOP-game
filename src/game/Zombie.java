@@ -80,12 +80,8 @@ public class Zombie extends ZombieActor {
 			
 				if (action != null) {
 					
-					for (Item item : this.getInventory()) {
-						if (item.hasCapability(LegCounter.ZERO)) {
-							System.out.println("0 leg!");
-						}
-						}
-					
+					// check if zombie only got 1 leg, then stop moving this turn if last turn was also moving.
+
 					String[] currentActionWord = action.menuDescription(this).split(" ");
 					if (currentActionWord[1].equals("moves")) {
 						for (Item item : this.getInventory()) {
@@ -99,7 +95,6 @@ public class Zombie extends ZombieActor {
 					}
 					return action;
 				}
-			
 			
 			}
 	

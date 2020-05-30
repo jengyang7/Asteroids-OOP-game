@@ -16,6 +16,8 @@ public class Corpse extends PortableItem {
 		
 	}
 	
+	// override tick method from PortableItem class, tick method will called each turn, 
+	// so that after 5 turn Human will rising from the death and become Zombie
 	@Override
 	public void tick(Location location) {
 		super.tick(location);

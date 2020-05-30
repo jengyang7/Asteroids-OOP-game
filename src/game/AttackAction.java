@@ -40,33 +40,29 @@ public class AttackAction extends Action {
 		
 		Weapon weapon = actor.getWeapon();
 		
-//		if (actor.hasCapability(ZombieCapability.UNDEAD)) {
-//			for (Item item : actor.getInventory()) {
-//				if (item.hasCapability(LegCounter.TWO)) {
-//					System.out.println("drop leg!"); 
-//					item.getDropAction().execute(actor, map);
-//					}
-//				}
-//		}
+
+		// if Zombie use bites attack, have 75% of missing attack
+		if (weapon.verb().equals("bites") && actor.hasCapability(ZombieCapability.UNDEAD)){
+			if( Math.random() <= 0.75 ) {
+				return missAttack(actor, target);
+				
+			}else {
+				// if zombie successfully use bite attack, restore 5 health points 
+				if (actor.hasCapability(ZombieCapability.UNDEAD)){
+					actor.heal(5);
+				}
+			}
+		}
+		else {
+			// general missing attack with 50% probability
+			if (rand.nextBoolean()) {
+				return missAttack(actor, target);
+			}
+		}
 		
-//		if (weapon.verb().equals("bites")){
-//			if( Math.random() <= 0.75 ) {
-//				return missAttack(actor, target);
-//				
-//			}else {
-//				if (actor.hasCapability(ZombieCapability.UNDEAD)){
-//					actor.heal(5);
-//				}
-//			}
-//		}
-//		else {
-//			if (rand.nextBoolean()) {
-//				return missAttack(actor, target);
-//			}
-//		}
-//		
 		 //Zombie has 25% probability to loose one limb if get attacked
-		
+		 // add zombie's limbs (leg and arm) into limbs arraylist, 
+		//then random drop any one limb choosing from the list
 
 		if( Math.random() <= 0.99 && target.hasCapability(ZombieCapability.UNDEAD)){
 			
@@ -118,13 +114,11 @@ public class AttackAction extends Action {
 			}
 			}
 		
-//			changeCapability(target.getInventory().get(limb));
 			Item LimbToDrop = target.getInventory().get(limb);
 			target.getInventory().get(limb).getDropAction().execute(target, map);
 			addLimb(LimbToDrop);
-//		target.getInventory().get(limb).getDropAction().execute(target, map);
 
-			System.out.println("drop limb!");
+			System.out.println("zombie drop limb!");
 		}	
 
 			}
@@ -165,7 +159,8 @@ public class AttackAction extends Action {
 		item.getDropAction().execute(actor, map);
 		
 	}
-		
+	
+	// add limb back to zombie after droping as I implement zombie leg and arm as each of one object with counter.
 	public void addLimb(Item item) {
 		if (item.hasCapability(LegCounter.TWO)) {
 			target.addItemToInventory(new Leg("leg", 'L', 15, "attack (with leg)", WeaponCapability.ITEM, LegCounter.ONE));
@@ -178,18 +173,19 @@ public class AttackAction extends Action {
 
 		}
 		else if (item.hasCapability(ArmCounter.TWO)) {
-			target.addItemToInventory(new Arm("leg", 'L', 20, "attack (with arm)", WeaponCapability.ITEM, ArmCounter.ONE));
+			target.addItemToInventory(new Arm("arm", 'A', 20, "attack (with arm)", WeaponCapability.ITEM, ArmCounter.ONE));
 			System.out.println("ccc");
 
 			
 		}
 		else if (item.hasCapability(ArmCounter.ONE)) {
-			target.addItemToInventory(new Arm("leg", 'L', 20, "attack (with arm)", WeaponCapability.ITEM, ArmCounter.ZERO));
+			target.addItemToInventory(new Arm("arm", 'A', 20, "attack (with arm)", WeaponCapability.ITEM, ArmCounter.ZERO));
 			System.out.println("ddd");
 
 		}
 	}
 	
+	// change droping limb from ITEM and WEAPON so that Zombie will not pick the dropping limb up 
 	public void changeCapability(Item item) {
 		item.removeCapability(WeaponCapability.ITEM);
 		item.addCapability(WeaponCapability.WEAPON);
