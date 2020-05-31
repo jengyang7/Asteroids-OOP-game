@@ -24,6 +24,7 @@ Jeng Yang
       * 25% chance of losing limbs when get attacked
       * Create leg and arm for zombie
       * Attack and movement changes when losing limbs 
+   * Implement Human Rising from the Dead
 * Draw the Class Diagram
 
 

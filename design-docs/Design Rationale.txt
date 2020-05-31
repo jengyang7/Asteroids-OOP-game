@@ -14,44 +14,51 @@ Zombie
 * bite attack with 50% probability, more damage
    * modify override getIntrinsicWeapon in Zombie class to instantiate “bite” intrinsic weapon
    * IntrinsicWeapon(20, "bites"); //20 is damage 
-   * if( new Random().nextDouble() <= 0.02 ) {“bites”} //50% probability
+   * if( new Random().nextDouble() <= 0.5 ) {“bites”} //50% probability
    * else {“punches”}
+   
 * restore 5 health points to zombie for the successful bite attack
+   * Validate zombie 
    * add actor.heal(5) to execute method in attackAction class if Weapon.verb = “bite” attack (actor is zombie)
-   * Validate 
+   
 * zombie pickup weapon near it when turn start
-   * as playturn gets called when each turns start, add pickup method before attack and chase in the playturn method to pick up a weapon when turn starts
+   * Create a pickupBehaviour and add it to zombie behaviours list
+   * as playturn gets called when each turns start, pickup action will be executed at first in the playturn method to pick up a weapon when turn starts
+   
 * saying “Braaainss” for 10% chance each turn
+   * add a ScreamBehaviour and ScreemAction
+   * add the behaviour after pickupBehaviour
    * get used of Math Random to implement probability
-   * in zombie playturn method, add if( new Random().nextDouble() <= 0.1 ) {saying “Brassssins”}
+   * in ScreamBehaviour, add if( new Random().nextDouble() <= 0.1 ) {return ScreamAction}
 
 
 Beating up zombie
 * attack on zombie may knock at least one its limb off
    * In attackaction class execute method, validate if the target is zombie (if actor.hasCapability(ZombieCapability.UNDEAD)), 25% probability to lose 1-2 arm or leg.
-   * zombie.Arm -1 / zombie.Leg -1
-   * set a new weaponItem (arm or leg) and set it to the ground at zombie current location
-* create a checklimb() method in attackAction class and call it execute method. The argument is a zombie.
+   * drop any one leg or arm (if got) onto ground
+   * add back leg or arm object back to zombie inventory with counter decrease 1
 
-
-
-
-* In checkLimb
-   * if arm count is 1(zombie.arm == 1), if getIntrinsicWeapon == “punch”, set the probability halved in attackActionClass’s execute method.
-   * if arm count is 0, drop all weapons to ground on current location (dropItemAction.execute)
-   * if leg count is 1, zombie speed is halved, move every second turn
-      * in zombie class playturn method, look for the lastAction, if last Action has movement then stop moving, else move the zombie
-   * if leg count is 0, zombie cannot move, but still can attack
+* If zombie lose 1 leg, movement speed halved, 
+   * in zombie playturn , check if zombie has one leg only, lastturn is hunt or wander action (move), this turn skip move action   
+* If zombie has lo leg, cant move. 
+   * in hunt and wander action getaction method, if zombie has no leg, return null
+* If zombie has one arm, punch propablity halved
+   * In zombie getIntrinsicWeapon, if only have one arm, probability divided by 2 
 
 
 * Create Arm and Leg class
-   * have the int attribute of arms and legs initializing each of the values of 2.
+   * have the counter capability attribute of arms and legs with each of the values of TWO.
    * leg char is “L”, arm char is “A”
-   * to fulfill the concept of reusability
+   * to fulfil the concept of reusability
    * Reason to create an arm and leg class is that we can reuse it when other actors like humans, players, and farmers need to implement limb later, we can just reuse the classes and don’t need to repeat the code again, thus again avoiding DRY code. This make the classes portable. 
-   * Arm and leg belong to a portable item which is a subclass of Item.
+   * Arm and leg belong to a weapon item which is a subclass of Item.
+   
 * add arm and leg in zombieActor constructor. This creates arms and legs for a zombie at first on creation.
 * Arm and Leg craft to zombie club and mace
+
+* Rising from Death
+   * Create a new Corpse Class
+   * override tick method in Corpse, after 5 turn Human Corpse become Zombie
 
 
 Human, Player 

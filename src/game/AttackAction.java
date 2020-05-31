@@ -60,68 +60,13 @@ public class AttackAction extends Action {
 			}
 		}
 		
-		 //Zombie has 25% probability to loose one limb if get attacked
-		 // add zombie's limbs (leg and arm) into limbs arraylist, 
-		//then random drop any one limb choosing from the list
+		// Zombie has 25% probability to loose one limb if get attacked
+		// add zombie's limbs (leg and arm) into limbs arraylist, 
+		// then random drop any one limb choosing from the list
 
 		if( Math.random() <= 0.99 && target.hasCapability(ZombieCapability.UNDEAD)){
-			
-			ArrayList<Integer> limbs = new ArrayList<Integer>();
-			System.out.println("limbs size");
-
-			System.out.println(limbs.size());
-			
-			for (int i=0; i <target.getInventory().size(); i++) {
-					if (target.getInventory().get(i).hasCapability(LegCounter.TWO) || target.getInventory().get(i).hasCapability(LegCounter.ONE) 
-							||target.getInventory().get(i).hasCapability(ArmCounter.TWO) || target.getInventory().get(i).hasCapability(ArmCounter.ONE)) {
-							if (target.getInventory().get(i).hasCapability(WeaponCapability.ITEM)) {
-								limbs.add(i);
-								System.out.println("limbs size");
-								System.out.println(limbs.size());
-							}
-						}
-					else {
-						System.out.println("limbs size");
-						break;}
-					}
-					
-			
-		if(limbs.size() > 1) {
-			int limb = 0;
-
-		if (limbs.size() == 1) {
-			
-			limb = limbs.get(0);
-			System.out.println("limbs size 1");
-			
+			lostLimb(map);
 		}
-			
-		else if(limbs.size() == 2) {
-			
-			System.out.println("limbs size 2");
-			System.out.println(limbs.size());
-		
-			for (int j=0; j <limbs.size(); j++)	{
-				System.out.println(target.getInventory().get(j));
-
-			}
-		
-			if (Math.random() >= 0.5) {
-				limb = limbs.get(0);
-				}
-			else {
-				limb = limbs.get(1);
-			}
-			}
-		
-			Item LimbToDrop = target.getInventory().get(limb);
-			target.getInventory().get(limb).getDropAction().execute(target, map);
-			addLimb(LimbToDrop);
-
-			System.out.println("zombie drop limb!");
-		}	
-
-			}
 		
 
 		int damage = weapon.damage();
@@ -160,32 +105,78 @@ public class AttackAction extends Action {
 		
 	}
 	
-	// add limb back to zombie after droping as I implement zombie leg and arm as each of one object with counter.
+	// method to dropping limb
+	private void lostLimb(GameMap map) {
+		ArrayList<Integer> limbs = new ArrayList<Integer>();
+		
+		for (int i=0; i <target.getInventory().size(); i++) {
+				if (target.getInventory().get(i).hasCapability(LegCounter.TWO) || target.getInventory().get(i).hasCapability(LegCounter.ONE) 
+						||target.getInventory().get(i).hasCapability(ArmCounter.TWO) || target.getInventory().get(i).hasCapability(ArmCounter.ONE)) {
+						if (target.getInventory().get(i).hasCapability(WeaponCapability.ITEM)) {
+							limbs.add(i);
+						}
+					}
+				else {
+					break;}
+				}
+				
+	//if Zombie only have at least one limb
+	if(limbs.size() > 1) {
+		
+		int limb = 0;
+
+		//if Zombie only have either leg or arm, just get the index of it
+		if (limbs.size() == 1) {	
+			limb = limbs.get(0);	
+			}	
+		
+		//if Zombie have both leg and arm, drop either one with 50% probability
+		else if(limbs.size() == 2) {
+		
+			if (Math.random() >= 0.5) {
+				limb = limbs.get(0);
+				}
+			else {
+				limb = limbs.get(1);
+				}
+			}
+			
+			// Drop the limb!
+			Item LimbToDrop = target.getInventory().get(limb);
+			target.getInventory().get(limb).getDropAction().execute(target, map);
+			addLimb(LimbToDrop);
+	
+			System.out.println(target.toString() + " drop a " + LimbToDrop.toString());
+		}	
+	}
+	
+	
+	// method to add limb back to zombie after droping as I implement zombie leg and arm as each of one object with counter.
 	public void addLimb(Item item) {
 		if (item.hasCapability(LegCounter.TWO)) {
-			target.addItemToInventory(new Leg("leg", 'L', 15, "attack (with leg)", WeaponCapability.ITEM, LegCounter.ONE));
+			target.addItemToInventory(new Leg("leg", 'L', 20, "attack (with leg)", WeaponCapability.ITEM, LegCounter.ONE));
 			System.out.println("aaa");
 
 		}
 		else if (item.hasCapability(LegCounter.ONE)) {
-			target.addItemToInventory(new Leg("leg", 'L', 15, "attack (with leg)", WeaponCapability.ITEM, LegCounter.ZERO));
+			target.addItemToInventory(new Leg("leg", 'L', 20, "attack (with leg)", WeaponCapability.ITEM, LegCounter.ZERO));
 			System.out.println("bbb");
 
 		}
 		else if (item.hasCapability(ArmCounter.TWO)) {
-			target.addItemToInventory(new Arm("arm", 'A', 20, "attack (with arm)", WeaponCapability.ITEM, ArmCounter.ONE));
+			target.addItemToInventory(new Arm("arm", 'A', 30, "attack (with arm)", WeaponCapability.ITEM, ArmCounter.ONE));
 			System.out.println("ccc");
 
 			
 		}
 		else if (item.hasCapability(ArmCounter.ONE)) {
-			target.addItemToInventory(new Arm("arm", 'A', 20, "attack (with arm)", WeaponCapability.ITEM, ArmCounter.ZERO));
+			target.addItemToInventory(new Arm("arm", 'A', 30, "attack (with arm)", WeaponCapability.ITEM, ArmCounter.ZERO));
 			System.out.println("ddd");
 
 		}
 	}
 	
-	// change droping limb from ITEM and WEAPON so that Zombie will not pick the dropping limb up 
+	// method to change dropping limb from ITEM and WEAPON so that Zombie will not pick the dropping limb up 
 	public void changeCapability(Item item) {
 		item.removeCapability(WeaponCapability.ITEM);
 		item.addCapability(WeaponCapability.WEAPON);
