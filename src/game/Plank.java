@@ -11,7 +11,7 @@ import edu.monash.fit2099.engine.WeaponItem;
 public class Plank extends WeaponItem {
 
 	public Plank() {
-		super("plank", ')', 20, "whacks");
+		super("plank", 'p', 20, "whacks");
 		this.addCapability(WeaponCapability.WEAPON);
 		// TODO Auto-generated constructor stub
 	}
