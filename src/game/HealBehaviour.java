@@ -23,7 +23,6 @@ public class HealBehaviour implements Behaviour {
 					actor.getInventory().remove(e);
 					System.out.println(actor.toString() + " successfully healed 10hp by consuming food in the his/her inventory");
 				}
-				
 			}
 			
 		}
