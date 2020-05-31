@@ -143,6 +143,7 @@ public class AttackAction extends Action {
 			
 			// Drop the limb!
 			Item LimbToDrop = target.getInventory().get(limb);
+			changeCapability(target.getInventory().get(limb));
 			target.getInventory().get(limb).getDropAction().execute(target, map);
 			addLimb(LimbToDrop);
 	
