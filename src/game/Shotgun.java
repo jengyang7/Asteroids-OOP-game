@@ -1,11 +1,11 @@
 package game;
 
 import java.util.ArrayList;
-
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Location;
 import edu.monash.fit2099.engine.WeaponItem;
+
 
 public class Shotgun extends WeaponItem {
 
@@ -19,257 +19,143 @@ public class Shotgun extends WeaponItem {
 		int x = initialLoc.x();
 		int y = initialLoc.y();
 		
+		ArrayList <ShotgunBullet> all = new ArrayList <ShotgunBullet>();
+		ArrayList <ShotgunBullet> all2 = new ArrayList <ShotgunBullet>();
+		
 		ArrayList <ShotgunBullet> highDamage = new ArrayList <ShotgunBullet>();
 		ArrayList <ShotgunBullet> mediumDamage = new ArrayList <ShotgunBullet>();
 		ArrayList <ShotgunBullet> lowDamage = new ArrayList <ShotgunBullet>();
 		
+		Integer[] northx = {x, x-1, x, x+1, x-2, x-1, x, x+1, x+2};
+		Integer[] northy = {y+1, y+2, y+2, y+2, y+3, y+3, y+3, y+3, y+3};
+		Integer[] southx = {x, x-1, x, x+1, x-2, x-1, x, x+1, x+2};
+		Integer[] southy = {y-1, y-2, y-2, y-2, y-3, y-3, y-3, y-3, y-3};
+		Integer[] eastx = {x+1, x+2, x+2 , x+2, x+3, x+3, x+3, x+3, x+3};
+		Integer[] easty = {y, y+1, y, y-1, y+2, y+1, y, y-1, y-2};
+		Integer[] westx = {x-1, x-2 , x-2, x-2, x-3, x-3, x-3, x-3, x-3};
+		Integer [] westy = {y, y+1, y, y-1, y+2, y+1, y, y-1, y-2};
+		
+		Integer[] swx = {x-1, x, x, x-1, x, x, x-1, x-2, x-3, x-3, x-2, x-1, x-3, x-2, x-3};
+		Integer[] swy = {y, y-1, y, y-1, y-2, y-3, y-2, y-1, y, y-1, y-2, y-3, y-2, y-3, y-3};
+		Integer[] nwx = {x-1, x, x-2, x-1, x, x, x-1, x-2, x-3, x-3, x-2, x-1, x-3, x-2, x-3};
+		Integer[] nwy = {y, y+1, y, y+1, y+2, y+3, y+2, y+1, y, y+1, y+2, y+3, y+2, y+3, y+3};
+		Integer[] sex = {x+1, x, x+2, x+1, x, x, x+1, x+2, x+3, x+3, x+2, x+1, x+3, x+2, x+3};
+		Integer[] sey = {y, y-1, y, y-1, y-2, y-3, y-2, y-1, y, y-1, y-2, y-3, y-2, y-3, y-3};
+		Integer[] nex = {x+1, x, x+2, x+1, x, x, x+1, x+2, x+3, x+3, x+2, x+1, x+3, x+2, x+3};
+		Integer[] ney = {y, y+1, y, y+1, y+2, y+3, y+2, y+1, y, y+1, y+2, y+3, y+2, y+3, y+3};
 		
 		
 		if (direction == "n" || direction == "s" || direction == "e" || direction == "w") {
-			
 			if (direction == "n") {
-				ShotgunBullet first = new ShotgunBullet(x, y + 1);
-				ShotgunBullet second = new ShotgunBullet(x - 1, y + 2);
-				ShotgunBullet third = new ShotgunBullet(x, y + 2);
-				ShotgunBullet fourth = new ShotgunBullet(x + 1, y + 2);
-				ShotgunBullet fifth = new ShotgunBullet(x - 2, y + 3);
-				ShotgunBullet sixth = new ShotgunBullet(x - 1, y + 3);
-				ShotgunBullet seventh = new ShotgunBullet(x, y + 3);
-				ShotgunBullet eighth = new ShotgunBullet(x + 1, y + 3);
-				ShotgunBullet nineth = new ShotgunBullet(x + 2, y + 3);
-				
-				highDamage.add(first);
-				mediumDamage.add(second);
-				mediumDamage.add(third);
-				mediumDamage.add(fourth);
-				lowDamage.add(fifth);
-				lowDamage.add(sixth);
-				lowDamage.add(seventh);	
-				lowDamage.add(eighth);
-				lowDamage.add(nineth);
+				for (int i = 0; i < northx.length; i ++) {
+					all.add(new ShotgunBullet(northx[i], northy[i]));
+				}
 				
 			}else if (direction == "s") {
-				ShotgunBullet first = new ShotgunBullet(x, y - 1);
-				ShotgunBullet second = new ShotgunBullet(x - 1, y - 2);
-				ShotgunBullet third = new ShotgunBullet(x, y - 2);
-				ShotgunBullet fourth = new ShotgunBullet(x + 1, y - 2);
-				ShotgunBullet fifth = new ShotgunBullet(x - 2, y - 3);
-				ShotgunBullet sixth = new ShotgunBullet(x - 1, y - 3);
-				ShotgunBullet seventh = new ShotgunBullet(x, y - 3);
-				ShotgunBullet eighth = new ShotgunBullet(x + 1, y - 3);
-				ShotgunBullet nineth = new ShotgunBullet(x + 2, y - 3);
+				for (int i = 0; i < southx.length; i ++) {
+					all.add(new ShotgunBullet(southx[i], southy[i]));
+				}
 				
-				highDamage.add(first);
-				mediumDamage.add(second);
-				mediumDamage.add(third);
-				mediumDamage.add(fourth);
-				lowDamage.add(fifth);
-				lowDamage.add(sixth);
-				lowDamage.add(seventh);	
-				lowDamage.add(eighth);
-				lowDamage.add(nineth);
 				
 			}else if (direction == "e") {
-				ShotgunBullet first = new ShotgunBullet(x + 1, y);
-				ShotgunBullet second = new ShotgunBullet(x + 2, y + 1);
-				ShotgunBullet third = new ShotgunBullet(x + 2, y);
-				ShotgunBullet fourth = new ShotgunBullet(x + 2, y - 1);
-				ShotgunBullet fifth = new ShotgunBullet(x + 3, y + 2);
-				ShotgunBullet sixth = new ShotgunBullet(x + 3, y + 1);
-				ShotgunBullet seventh = new ShotgunBullet(x + 3, y);
-				ShotgunBullet eighth = new ShotgunBullet(x + 3, y - 1);
-				ShotgunBullet nineth = new ShotgunBullet(x + 3, y - 2);
-				
-				highDamage.add(first);
-				mediumDamage.add(second);
-				mediumDamage.add(third);
-				mediumDamage.add(fourth);
-				lowDamage.add(fifth);
-				lowDamage.add(sixth);
-				lowDamage.add(seventh);	
-				lowDamage.add(eighth);
-				lowDamage.add(nineth);
-				
+				for (int i = 0; i < eastx.length; i ++) {
+					all.add(new ShotgunBullet(eastx[i], easty[i]));
+				}
+			
 			}else if (direction == "w") {
-				ShotgunBullet first = new ShotgunBullet(x - 1, y);
-				ShotgunBullet second = new ShotgunBullet(x - 2, y + 1);
-				ShotgunBullet third = new ShotgunBullet(x - 2, y);
-				ShotgunBullet fourth = new ShotgunBullet(x - 2, y - 1);
-				ShotgunBullet fifth = new ShotgunBullet(x - 3, y + 2);
-				ShotgunBullet sixth = new ShotgunBullet(x - 3, y + 1);
-				ShotgunBullet seventh = new ShotgunBullet(x - 3, y);
-				ShotgunBullet eighth = new ShotgunBullet(x - 3, y - 1);
-				ShotgunBullet nineth = new ShotgunBullet(x - 3, y - 2);
-				
-				highDamage.add(first);
-				mediumDamage.add(second);
-				mediumDamage.add(third);
-				mediumDamage.add(fourth);
-				lowDamage.add(fifth);
-				lowDamage.add(sixth);
-				lowDamage.add(seventh);	
-				lowDamage.add(eighth);
-				lowDamage.add(nineth);
+				for (int i = 0; i < westx.length; i ++) {
+					all.add(new ShotgunBullet(westx[i], westy[i]));
+				}
 			}
 			
+		
 		}else if (direction == "ne" || direction == "nw" || direction == "se" || direction == "sw") {
 			if (direction == "sw") {
-				ShotgunBullet first = new ShotgunBullet(x - 1, y);
-				ShotgunBullet second = new ShotgunBullet(x, y - 1);
-				ShotgunBullet third = new ShotgunBullet(x - 2, y);
-				ShotgunBullet fourth = new ShotgunBullet(x - 1, y - 1);
-				ShotgunBullet fifth = new ShotgunBullet(x, y - 2);
-				ShotgunBullet sixth = new ShotgunBullet(x , y - 3);
-				ShotgunBullet seventh = new ShotgunBullet(x - 1, y - 2);
-				ShotgunBullet eighth = new ShotgunBullet(x - 2, y - 1);
-				ShotgunBullet nineth = new ShotgunBullet(x - 3, y);
-				ShotgunBullet ten = new ShotgunBullet(x - 3, y - 1);
-				ShotgunBullet eleven = new ShotgunBullet(x - 2, y - 2);
-				ShotgunBullet twelve = new ShotgunBullet(x - 1, y - 3);
-				ShotgunBullet thirteen = new ShotgunBullet(x - 3, y - 2);
-				ShotgunBullet fourteen = new ShotgunBullet(x - 2, y - 3);
-				ShotgunBullet fifteen = new ShotgunBullet(x - 3, y - 3);
-				
-				highDamage.add(first);
-				highDamage.add(second);
-				mediumDamage.add(third);
-				mediumDamage.add(fourth);
-				mediumDamage.add(fifth);
-				mediumDamage.add(sixth);
-				mediumDamage.add(seventh);
-				mediumDamage.add(eighth);
-				mediumDamage.add(nineth);
-				lowDamage.add(ten);
-				lowDamage.add(eleven);
-				lowDamage.add(twelve);
-				lowDamage.add(thirteen);
-				lowDamage.add(fourteen);
-				lowDamage.add(fifteen);
+				for (int i = 0; i < swx.length; i ++) {
+					all.add(new ShotgunBullet(swx[i], swy[i]));
+				}
 				
 			}else if (direction == "nw") {
-				ShotgunBullet first = new ShotgunBullet(x - 1, y);
-				ShotgunBullet second = new ShotgunBullet(x, y + 1);
-				ShotgunBullet third = new ShotgunBullet(x - 2, y);
-				ShotgunBullet fourth = new ShotgunBullet(x - 1, y + 1);
-				ShotgunBullet fifth = new ShotgunBullet(x, y + 2);
-				ShotgunBullet sixth = new ShotgunBullet(x , y + 3);
-				ShotgunBullet seventh = new ShotgunBullet(x - 1, y + 2);
-				ShotgunBullet eighth = new ShotgunBullet(x - 2, y + 1);
-				ShotgunBullet nineth = new ShotgunBullet(x - 3, y);
-				ShotgunBullet ten = new ShotgunBullet(x - 3, y + 1);
-				ShotgunBullet eleven = new ShotgunBullet(x - 2, y + 2);
-				ShotgunBullet twelve = new ShotgunBullet(x - 1, y + 3);
-				ShotgunBullet thirteen = new ShotgunBullet(x - 3, y + 2);
-				ShotgunBullet fourteen = new ShotgunBullet(x - 2, y + 3);
-				ShotgunBullet fifteen = new ShotgunBullet(x - 3, y + 3);
-				
-				highDamage.add(first);
-				highDamage.add(second);
-				mediumDamage.add(third);
-				mediumDamage.add(fourth);
-				mediumDamage.add(fifth);
-				mediumDamage.add(sixth);
-				mediumDamage.add(seventh);
-				mediumDamage.add(eighth);
-				mediumDamage.add(nineth);
-				lowDamage.add(ten);
-				lowDamage.add(eleven);
-				lowDamage.add(twelve);
-				lowDamage.add(thirteen);
-				lowDamage.add(fourteen);
-				lowDamage.add(fifteen);
-				
+				for (int i = 0; i < nwx.length; i ++) {
+					all.add(new ShotgunBullet(nwx[i], nwy[i]));
+				}
+			
+			
 			}else if (direction == "se") {
-				ShotgunBullet first = new ShotgunBullet(x + 1, y);
-				ShotgunBullet second = new ShotgunBullet(x, y - 1);
-				ShotgunBullet third = new ShotgunBullet(x + 2, y);
-				ShotgunBullet fourth = new ShotgunBullet(x + 1, y - 1);
-				ShotgunBullet fifth = new ShotgunBullet(x, y - 2);
-				ShotgunBullet sixth = new ShotgunBullet(x , y - 3);
-				ShotgunBullet seventh = new ShotgunBullet(x + 1, y - 2);
-				ShotgunBullet eighth = new ShotgunBullet(x + 2, y - 1);
-				ShotgunBullet nineth = new ShotgunBullet(x + 3, y);
-				ShotgunBullet ten = new ShotgunBullet(x + 3, y - 1);
-				ShotgunBullet eleven = new ShotgunBullet(x + 2, y - 2);
-				ShotgunBullet twelve = new ShotgunBullet(x + 1, y - 3);
-				ShotgunBullet thirteen = new ShotgunBullet(x + 3, y - 2);
-				ShotgunBullet fourteen = new ShotgunBullet(x + 2, y - 3);
-				ShotgunBullet fifteen = new ShotgunBullet(x + 3, y - 3);
-				
-				highDamage.add(first);
-				highDamage.add(second);
-				mediumDamage.add(third);
-				mediumDamage.add(fourth);
-				mediumDamage.add(fifth);
-				mediumDamage.add(sixth);
-				mediumDamage.add(seventh);
-				mediumDamage.add(eighth);
-				mediumDamage.add(nineth);
-				lowDamage.add(ten);
-				lowDamage.add(eleven);
-				lowDamage.add(twelve);
-				lowDamage.add(thirteen);
-				lowDamage.add(fourteen);
-				lowDamage.add(fifteen);
-				
+				for (int i = 0; i < sex.length; i ++) {
+					all.add(new ShotgunBullet(sex[i], sey[i]));
+				}
+			
 			}else if (direction == "ne") {
-				ShotgunBullet first = new ShotgunBullet(x + 1, y);
-				ShotgunBullet second = new ShotgunBullet(x, y + 1);
-				ShotgunBullet third = new ShotgunBullet(x + 2, y);
-				ShotgunBullet fourth = new ShotgunBullet(x + 1, y + 1);
-				ShotgunBullet fifth = new ShotgunBullet(x, y + 2);
-				ShotgunBullet sixth = new ShotgunBullet(x , y + 3);
-				ShotgunBullet seventh = new ShotgunBullet(x + 1, y + 2);
-				ShotgunBullet eighth = new ShotgunBullet(x + 2, y + 1);
-				ShotgunBullet nineth = new ShotgunBullet(x + 3, y);
-				ShotgunBullet ten = new ShotgunBullet(x + 3, y + 1);
-				ShotgunBullet eleven = new ShotgunBullet(x + 2, y + 2);
-				ShotgunBullet twelve = new ShotgunBullet(x + 1, y + 3);
-				ShotgunBullet thirteen = new ShotgunBullet(x + 3, y + 2);
-				ShotgunBullet fourteen = new ShotgunBullet(x + 2, y + 3);
-				ShotgunBullet fifteen = new ShotgunBullet(x + 3, y + 3);
-				
-				highDamage.add(first);
-				highDamage.add(second);
-				mediumDamage.add(third);
-				mediumDamage.add(fourth);
-				mediumDamage.add(fifth);
-				mediumDamage.add(sixth);
-				mediumDamage.add(seventh);
-				mediumDamage.add(eighth);
-				mediumDamage.add(nineth);
-				lowDamage.add(ten);
-				lowDamage.add(eleven);
-				lowDamage.add(twelve);
-				lowDamage.add(thirteen);
-				lowDamage.add(fourteen);
-				lowDamage.add(fifteen);
+				for (int i = 0; i < nex.length; i ++) {
+					all.add(new ShotgunBullet(nex[i], ney[i]));
+				}
 				
 			}
 			
 		}
+		
+		if (all.size() > 0) {
+			for (int i = 0; i < 1; i ++) {
+				highDamage.add(all.get(i));
+			}
+			
+			for (int i = 1; i < 4; i ++ ) {
+				mediumDamage.add(all.get(i));
+			}
+			
+			for (int i = 4; i < 9; i ++) {
+				lowDamage.add(all.get(i));
+			}
+			
+			
+		
+		}else if (all2.size() > 0) {
+			for (int i = 0; i < 2; i ++) {
+				highDamage.add(all.get(i));
+			}
+			
+			for (int i = 2; i < 9; i ++ ) {
+				mediumDamage.add(all.get(i));
+			}
+			
+			for (int i = 9; i < 15; i ++) {
+				lowDamage.add(all.get(i));
+				}
+			}
+		
+		
 		for (int i = 0; i < highDamage.size(); i ++) {
+			double random1 = Math.random();
+			
 			if (map.at(highDamage.get(i).x(), highDamage.get(i).y()).containsAnActor() == true) {
+				if (random1 <= 0.75) {
 				Actor target = map.at(highDamage.get(i).x(), highDamage.get(i).y()).getActor();
 				target.hurt(70);
 				}
+			}
 		}
 		
 		for (int i = 0; i < mediumDamage.size(); i ++){
-			if (map.at(highDamage.get(i).x(), highDamage.get(i).y()).containsAnActor() == true) {
-				Actor target = map.at(highDamage.get(i).x(), highDamage.get(i).y()).getActor();
-				target.hurt(40);
+			double random2 = Math.random();
+			
+			if (map.at(mediumDamage.get(i).x(), mediumDamage.get(i).y()).containsAnActor() == true) {
+				if (random2 <= 0.75) {
+					Actor target = map.at(mediumDamage.get(i).x(), mediumDamage.get(i).y()).getActor();
+					target.hurt(40);
 				}
+			}
 			
 		}
 		
-		for (int i = 0; i < mediumDamage.size(); i ++) {
-			if (map.at(highDamage.get(i).x(), highDamage.get(i).y()).containsAnActor() == true) {
-				Actor target = map.at(highDamage.get(i).x(), highDamage.get(i).y()).getActor();
-				target.hurt(20);
+		for (int i = 0; i < lowDamage.size(); i ++) {
+			double random3 = Math.random();
+			if (map.at(lowDamage.get(i).x(), lowDamage.get(i).y()).containsAnActor() == true) {
+				if (random3 <= 0.75) {
+					Actor target = map.at(lowDamage.get(i).x(), lowDamage.get(i).y()).getActor();
+					target.hurt(20);
+					}
 				}
-			
+			}
 		}
 	}
-
-}
