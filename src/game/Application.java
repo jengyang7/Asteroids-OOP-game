@@ -3,13 +3,11 @@ package game;
 import java.util.Arrays;
 import java.util.List;
 
-import edu.monash.fit2099.demo.mars.MartianItem;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Display;
 import edu.monash.fit2099.engine.FancyGroundFactory;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.MoveActorAction;
-import edu.monash.fit2099.engine.World;
 
 /**
  * The main class for the zombie apocalypse game.
@@ -18,7 +16,7 @@ import edu.monash.fit2099.engine.World;
 public class Application {
 
 	public static void main(String[] args) {
-		World world = new World(new Display());
+		GameWorld world = new GameWorld(new Display());
 
 		FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Fence(), new Tree());
 		
@@ -48,7 +46,7 @@ public class Application {
 		".........................................................................++++...",
 		"..........................................................................++....",
 		"................................................................................");
-		GameMap gameMap = new GameMap(groundFactory, map );
+		GameMap gameMap = new GameMap(groundFactory, map);
 		world.addGameMap(gameMap);
 		
 		List<String> townMap = Arrays.asList(
@@ -84,8 +82,15 @@ public class Application {
         horse.addAction(new MoveActorAction(town.at(2, 2), "to Town!"));
         gameMap.at(40, 17).addItem(horse);
         
+        TownItem cat = new TownItem("Cat", 'c', false);
+        cat.addAction(new MoveActorAction(gameMap.at(4, 4), "to GameMap!"));
+        town.at(10, 17).addItem(cat);
+        
 		Actor player = new Player("Player", '@', 100);
 		world.addPlayer(player, gameMap.at(42, 15));
+		
+		Actor mambo = new MamboMarie("Mambo Marie", 'M', 100);
+		world.addMambo(mambo);
 		
 	    // Place some random humans
 		String[] humans = {"Carlton", "May", "Vicente", "Andrea", "Wendy",
@@ -113,6 +118,8 @@ public class Application {
 		
 		// place a simple weapon
 		gameMap.at(74, 20).addItem(new Plank());
+		
+		town.at(20, 20).addItem(new Shotgun());
 		
 		// FIXME: Add more zombies!
 		gameMap.at(30, 20).addActor(new Zombie("Groan"));
