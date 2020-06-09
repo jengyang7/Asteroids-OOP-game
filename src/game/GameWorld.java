@@ -51,7 +51,7 @@ public class GameWorld extends World{
 			playersMap.draw(display);
 			
 			if (!gameMaps.get(0).contains(mambo)) {
-				if (Math.random() <= 0.5) {
+				if (Math.random() <= 0.05) {
 					int x, y;
 					int width = gameMaps.get(0).getXRange().max();
 					int height = gameMaps.get(0).getYRange().max();
