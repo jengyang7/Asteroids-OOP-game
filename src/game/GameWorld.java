@@ -71,11 +71,11 @@ public class GameWorld extends World{
 					}
 					
 					// Check if there is Mambo on the compound map then player win
-					else if (!gameMaps.get(0).contains(mambo)) {
-						display.println("Player wins");
-						gameOver = true;
-						break;
-					}
+//					else if (!gameMaps.get(0).contains(mambo)) {
+//						display.println("Player wins");
+//						gameOver = true;
+//						break;
+//					}
 				}
 			}  
 			
