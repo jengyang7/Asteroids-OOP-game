@@ -90,7 +90,7 @@ public class GameWorld extends World{
 				display.println("Player loses");
 				gameOver = true;
 				break;
-				}
+				} 
 			
 			// Check if there is Zombie on the compound map then player win
 			int zombieCount = 0;
