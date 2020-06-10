@@ -77,7 +77,7 @@ public class GameWorld extends World{
 						break;
 					}
 				}
-			}
+			}  
 			
 			// Check if there is Human on the compound map then player lose
 			int humanCount = 0;
