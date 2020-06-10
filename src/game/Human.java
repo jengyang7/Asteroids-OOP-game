@@ -23,6 +23,7 @@ public class Human extends ZombieActor {
 	 */
 	public Human(String name) {
 		super(name, 'H', 50, ZombieCapability.ALIVE);
+		this.addCapability(ActorType.HUMAN);
 	}
 	
 	/**

@@ -15,7 +15,8 @@ public class MamboMarie extends ZombieActor{
 	int turn = 0;
 
 	public MamboMarie(String name, char displayChar, int hitPoints) {
-		super(name, displayChar, hitPoints, ZombieCapability.ALIVE);
+		super(name, displayChar, hitPoints, ZombieCapability.UNDEAD);
+		this.addCapability(ActorType.MAMBO);
 	}
 
 	@Override

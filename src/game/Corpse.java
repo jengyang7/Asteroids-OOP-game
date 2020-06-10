@@ -16,19 +16,27 @@ public class Corpse extends PortableItem {
 		
 	}
 	
+	
 	// override tick method from PortableItem class, tick method will called each turn, 
 	// so that after 5 turn Human will rising from the death and become Zombie
 	@Override
 	public void tick(Location location) {
 		super.tick(location);
 		
-		if (actor.hasCapability(ZombieCapability.ALIVE)) {
-		turn++;
-		System.out.println(actorName + " corpse turn: " + turn);
-		if (turn == 5) {
-			location.removeItem(this);
-			location.addActor(new Zombie(actorName));		
-			}
+		if (actor.hasCapability(ActorType.HUMAN)) {
+			turn++;
+		
+			if (turn == 5) {
+				location.removeItem(this);
+				if(!location.containsAnActor()) {
+					location.addActor(new Zombie(actorName));		
+	
+				}else {
+					if (!location.getExits().isEmpty())
+						location.getExits().get(0).getDestination().addActor(new Zombie(actorName));
+	
+					}
+				}
 		}
 	}
 }

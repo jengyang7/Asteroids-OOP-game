@@ -21,13 +21,14 @@ public class Zombie extends ZombieActor {
 	private Behaviour[] behaviours = {
 			new PickUpBehaviour(),
 			new ScreamBehaviour("braaaains"),
-			new AttackBehaviour(ZombieCapability.ALIVE),
+			new ZombieAttackBehaviour(ZombieCapability.ALIVE),
 			new HuntBehaviour(Human.class, 10),
 			new WanderBehaviour()
 	};
 
 	public Zombie(String name) {
 		super(name, 'Z', 100, ZombieCapability.UNDEAD);
+		this.addCapability(ActorType.ZOMBIE);
 		this.addItemToInventory(new Leg("leg", 'L', 20, "attack (with leg)", WeaponCapability.ITEM, LegCounter.TWO));
 		this.addItemToInventory(new Arm("arm", 'A', 30, "attack (with arm)", WeaponCapability.ITEM, ArmCounter.TWO));
 	}
