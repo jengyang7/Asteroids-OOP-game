@@ -149,6 +149,7 @@ public class GameWorld extends World{
 		} 
 		while (gameMaps.get(0).at(x, y).containsAnActor());
 		gameMaps.get(0).at(x,  y).addActor(mambo);		
+		
 	}
 	
 	@ Override
