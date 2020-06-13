@@ -61,7 +61,7 @@ Yung Sheng
 * Implemented Sniper Rifle
     * Created class sniperActorChoice which list out actor for player to choose to shoot
     * Created class sniperActorList which let player to choose player to shoot
-    * Created class sniperAimType which let player choose the sniper aim type
+    * Created class sniperAimType which let player choose the sniper rifle aim type
 
 
 Assignment 1 workflow
