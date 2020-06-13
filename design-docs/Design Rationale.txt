@@ -60,6 +60,28 @@ Beating up zombie
    * Create a new Corpse Class
    * override tick method in Corpse, after 5 turn Human Corpse become Zombie
 
+Assignment 3
+
+* Implement town level
+	* Create a new Town Map
+	* Create horse that Player can ride to town map
+		* moveactor method
+	* Old compound map continue move and act
+* Implement Mamboo Marie
+	* 5% chance of appearing on map
+		* find height and width of the compound map
+		* use Math Random to find the edge location on the map 
+	* born 5 new zombies every 10 turns
+		* use turn in chantingaction class to tracking turn
+	* if not killed, vanish after 30 turns 
+		* after 30 turn , remove Mamboo from map
+* Ending the game
+	* quit game option in the menu
+		* add a quitgame action to player actions
+	* if player or all humans killed, player loses
+		* override stillRunning method from World Class in GameWorld Subclass 
+	* if all zombies and Mamboo Marie have been wiped out, player wins 
+
 
 Human, Player 
 * Has behaviour of wandering and PickupBehaviour
