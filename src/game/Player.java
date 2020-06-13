@@ -35,7 +35,7 @@ public class Player extends Human {
 //		}
 //		return getIntrinsicWeapon();
 //	}
-	
+//	
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
 		List <Item> item = this.getInventory();
@@ -53,6 +53,7 @@ public class Player extends Human {
 				break;
 			}
 		}
+		
 		if (lastAction.getNextAction() != null) {
 			return lastAction.getNextAction();
 		}
