@@ -53,6 +53,15 @@ Jeng Yang
 	* if all zombies and Mamboo Marie have been wiped out, player wins 
 
 Yung Sheng
+* Implemented Shotgun Shooting
+    * Created class for shotgun, shotgun Bullet and shotgun shooting
+    * Calculated shotgun bullet coordinates and shotgun damage
+    * 70, 40, 20 damage for short, medium and long range respectively
+    
+* Implemented Sniper Rifle
+    * Created class sniperActorChoice which list out actor for player to choose to shoot
+    * Created class sniperActorList which let player to choose player to shoot
+    * Created class sniperAimType which let player choose the sniper aim type
 
 
 Assignment 1 workflow
