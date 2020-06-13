@@ -54,7 +54,7 @@ public class GameWorld extends World{
 			// check player on map
 			
 			if (!gameMaps.get(0).contains(mambo) && Math.random() <= 0.5) {
-					this.createMambo();
+					this.appearMambo();
 			}
 
 			// Process all the actors.
@@ -121,7 +121,7 @@ public class GameWorld extends World{
 		display.println(result);
 	}
 	
-	private void createMambo() {
+	private void appearMambo() {
 		
 		int x, y;
 		int width = gameMaps.get(0).getXRange().max();
