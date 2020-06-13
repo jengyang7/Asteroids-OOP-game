@@ -6,13 +6,9 @@ Group members:
 * Ho Yung Sheng 29035619
 
 
-
-
 Work Breakdown Agreement
 
-
-
-
+Assignment 2
 Jeng Yang
 * Design and Implement Zombie Functionality
    * Zombie attacks
@@ -27,39 +23,72 @@ Jeng Yang
    * Implement Human Rising from the Dead
 * Draw the Class Diagram
 
-
 Yung Sheng
 * Design and Implement Farmer and Human Functionality 
       - Player harvest food, farmer sow, fertilize and harvest food
       - Player, Human pick up item behavior, action towards the item, such as changing zombie leg to zombie mace or zombie arm to zombie clubs.
 
 
-Assignment 1 date
+Assignment 3
 
+Jeng Yang
+* Implement town level
+	* Create a new Town Map
+	* Create horse that Player can ride to town map
+	* Old compound map continue move and act
+* Implement Mamboo Marie
+	* 5% chance of appearing on map
+	* born 5 new zombies every 10 turns
+	* if not killed, vanish after 30 turns 
+* Ending the game
+	* quit game option in the menu
+	* if player or all humans killed, player loses
+	* if all zombies and Mamboo Marie have been wiped out, player wins 
+
+Yung Sheng
+
+
+Assignment 1 workflow
 
 Task
-	Date
+	
 	Task assign
 	6th May 2020
+	
 	Design
 	7th May 2020
+	
 	Review
 	10th May 2020
 	
-Assignment 2 date
-
+	
+Assignment 2 workflow
 
 Task
-	Date
 	Discuss Implementation
 	11th May 2020
+	
 	Review specification for Assignment 2
 	13-22th May 2020
+	
 	Testing and made some changes
 	22th May 2020
+	
+	
+Assignment 3 workflow
 
+Task
+	Discuss and assign Task
+	25th May 2020
+	
+	Discuss implementation
+	26th May 2020
+	
+	Testing Functionality
+	5th May 2020
+	
 
 
 Agreement
 Jeng Yang: I accept this WBA.
-Ho Yung Sheng: I accepted this WBA≥
+Ho Yung Sheng: I accepted this WBA
