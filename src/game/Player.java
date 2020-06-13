@@ -39,17 +39,21 @@ public class Player extends Human {
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
 		List <Item> item = this.getInventory();
+		
+		for (Item e: item) {
+			if (e.hasCapability(WeaponCapability.WEAPON) && e.toString() == "Sniper Rifle") {
+				actions.add(new SniperActorChoice(display, lastAction));
+				break;
+			}
+		}
+		
+		Action[] shotgunDirection = {new ShotgunNorth(), new ShotgunSouth(), new ShotgunEast(), new ShotgunWest(), new ShotgunNorthEast(), new ShotgunNorthWest(),
+									new ShotgunSouthEast(), new ShotgunSouthWest()};
 		for(Item e: item) {
 			if (e.hasCapability(WeaponCapability.WEAPON) && e.toString() == "Shotgun"){
-				actions.add(new ShotgunNorth());
-				actions.add(new ShotgunSouth());
-				actions.add(new ShotgunEast());
-				actions.add(new ShotgunWest());
-				actions.add(new ShotgunNorthEast());
-				actions.add(new ShotgunNorthWest());
-				actions.add(new ShotgunSouthEast());
-				actions.add(new ShotgunSouthWest());
-				actions.add(new SniperActorChoice());
+				for( int i = 0; i < shotgunDirection.length; i ++) {
+					actions.add(shotgunDirection[i]);
+				}
 				break;
 			}
 		}
