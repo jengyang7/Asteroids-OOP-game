@@ -82,9 +82,9 @@ public class ZombieAttackAction extends AttackAction{
 		ArrayList<Integer> limbs = new ArrayList<Integer>();
 		
 		for (int i=0; i <target.getInventory().size(); i++) {
-				if (target.getInventory().get(i).hasCapability(LegCounter.TWO) || target.getInventory().get(i).hasCapability(LegCounter.ONE) 
-						||target.getInventory().get(i).hasCapability(ArmCounter.TWO) || target.getInventory().get(i).hasCapability(ArmCounter.ONE)) {
-						if (target.getInventory().get(i).hasCapability(WeaponCapability.ITEM)) {
+				if (target.hasCapability(LegCounter.TWO) || target.hasCapability(LegCounter.ONE) 
+						||target.hasCapability(ArmCounter.TWO) || target.hasCapability(ArmCounter.ONE)) {
+						if (target.hasCapability(WeaponCapability.ITEM)) {
 							limbs.add(i);
 						}
 					}
@@ -127,24 +127,20 @@ public class ZombieAttackAction extends AttackAction{
 	// method to add limb back to zombie after droping as I implement zombie leg and arm as each of one object with counter.
 	public void addLimb(Item item) {
 		if (item.hasCapability(LegCounter.TWO)) {
-			target.addItemToInventory(new Leg("leg", 'L', 20, "attack (with leg)", WeaponCapability.ITEM, LegCounter.ONE));
-			System.out.println("aaa");
+			target.addItemToInventory(new Leg("leg", 'L', 20, "kooock", WeaponCapability.ITEM, LegCounter.ONE));
 
 		}
 		else if (item.hasCapability(LegCounter.ONE)) {
-			target.addItemToInventory(new Leg("leg", 'L', 20, "attack (with leg)", WeaponCapability.ITEM, LegCounter.ZERO));
-			System.out.println("bbb");
+			target.addItemToInventory(new Leg("leg", 'L', 20, "kooock", WeaponCapability.ITEM, LegCounter.ZERO));
 
 		}
 		else if (item.hasCapability(ArmCounter.TWO)) {
-			target.addItemToInventory(new Arm("arm", 'A', 30, "attack (with arm)", WeaponCapability.ITEM, ArmCounter.ONE));
-			System.out.println("ccc");
+			target.addItemToInventory(new Arm("arm", 'A', 30, "whoosh", WeaponCapability.ITEM, ArmCounter.ONE));
 
 			
 		}
 		else if (item.hasCapability(ArmCounter.ONE)) {
-			target.addItemToInventory(new Arm("arm", 'A', 30, "attack (with arm)", WeaponCapability.ITEM, ArmCounter.ZERO));
-			System.out.println("ddd");
+			target.addItemToInventory(new Arm("arm", 'A', 30, "whoosh", WeaponCapability.ITEM, ArmCounter.ZERO));
 
 		}
 	}
