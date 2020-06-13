@@ -21,7 +21,7 @@ Jeng Yang
       * Create leg and arm for zombie
       * Attack and movement changes when losing limbs 
    * Implement Human Rising from the Dead
-* Draw the Class Diagram
+* Draw the Class Diagram 
 
 Yung Sheng
 * Design and Implement Farmer and Human Functionality 
