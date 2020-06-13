@@ -44,6 +44,7 @@ public class FarmBehaviour implements Behaviour {
 				
 				}
 		
+			
 		//If it is a player or human that encounter a crop, they can only collect and store harvested crop by the farmer in their inventory. Else, do nothing
 		}else if (actor.getDisplayChar() == 'H' || actor.getDisplayChar() == '@') {
 			for (Exit e: exits) {
