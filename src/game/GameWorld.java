@@ -47,8 +47,7 @@ public class GameWorld extends World{
 		}
 
 		// This loop is basically the whole game
-		boolean gameOver = false;
-		while (gameOver == false) {
+		while (stillRunning()) {
 			GameMap playersMap = actorLocations.locationOf(player).map();
 			playersMap.draw(display);
 			
@@ -62,56 +61,18 @@ public class GameWorld extends World{
 			for (Actor actor : actorLocations) {
 				if (stillRunning()) {
 					processActorTurn(actor);
-					
-					// Check if there is pLayer on the compound map then player lose
-					if (!gameMaps.get(0).contains(player)) {
-						display.println("Player loses");
-						gameOver = true;
+					if(!stillRunning()) {
 						break;
 					}
-					
-					// Check if there is Mambo on the compound map then player win
-//					else if (!gameMaps.get(0).contains(mambo)) {
-//						display.println("Player wins");
-//						gameOver = true;
-//						break;
-//					}
 				}
-			}  
-			
-			// Check if there is Human on the compound map then player lose
-			int humanCount = 0;
-			for (Actor eachActor : actorLocations) {
-				if (eachActor.hasCapability(ActorType.HUMAN) && gameMaps.get(0).contains(eachActor)) {
-					humanCount++;
-				}
-			}
-			if (humanCount == 0) {
-				display.println("Player loses");
-				gameOver = true;
-				break;
-				} 
-			
-			// Check if there is Zombie on the compound map then player win
-			int zombieCount = 0;
-			for (Actor eachActor : actorLocations) {
-				if (eachActor.hasCapability(ActorType.ZOMBIE) && gameMaps.get(0).contains(eachActor)) {
-					zombieCount++;
-				}
-			}
-			if (zombieCount == 0) {
-				display.println("Player wins");
-				gameOver = true;
-				break;
-				}
-			
+			}	
 			
 			// Tick over all the maps. For the map stuff.
-			if (!gameOver) {
-				for (GameMap gameMap : gameMaps) {
-					gameMap.tick();
-				}
+			
+			for (GameMap gameMap : gameMaps) {
+				gameMap.tick();
 			}
+		
 
 		}
 		display.println(endGameMessage());
@@ -165,10 +126,9 @@ public class GameWorld extends World{
 		int x, y;
 		int width = gameMaps.get(0).getXRange().max();
 		int height = gameMaps.get(0).getYRange().max();
-		do {
-			//new Random().nextInt(list.size())
-			// Math.floor(Math.random() * 6) + 1  
-			
+		
+		// calculate the random location of map map 
+		do { 	
 			if (Math.random() <= 0.5) {
 				if (Math.random()<= 0.5) {
 					x = 0;
@@ -189,6 +149,41 @@ public class GameWorld extends World{
 		} 
 		while (gameMaps.get(0).at(x, y).containsAnActor());
 		gameMaps.get(0).at(x,  y).addActor(mambo);		
+	}
+	
+	@ Override
+	protected boolean stillRunning() {
+		
+		// Check Count of Zombie and Human on both map
+		int humanCount = 0, zombieCount= 0;
+		
+		for (Actor eachActor : actorLocations) {
+			if (eachActor.hasCapability(ActorType.HUMAN) && (gameMaps.get(0).contains(eachActor) || gameMaps.get(1).contains(eachActor))) {
+				humanCount++;
+			}else if (eachActor.hasCapability(ActorType.ZOMBIE) && (gameMaps.get(0).contains(eachActor) || gameMaps.get(1).contains(eachActor))) {
+				zombieCount++;
+			}
+		}
+		
+		// Check if all human are killed on both compound and town map then player lose
+		if (humanCount == 0) {
+			display.println("Player loses");
+			return false;
+			}  
+		
+		// Check if all Zombie and Mambo are killed on both compound and town map then player lose
+		else if (zombieCount == 0 && !gameMaps.get(0).contains(mambo) ) {
+			display.println("Player wins");
+			return false;
+			}
+		
+		// Check if Player is killed and not on both compound and toown map then player lose
+		else if (!gameMaps.get(0).contains(player) && !gameMaps.get(1).contains(player)) {
+			display.println("Player loses");
+			return false;
+		}
+		
+		return actorLocations.contains(player);
 	}
 	
 	protected String endGameMessage() {
