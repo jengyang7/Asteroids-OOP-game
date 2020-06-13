@@ -110,6 +110,8 @@ public class GameWorld extends World{
 			actions.add(item.getPickUpAction());
 		}
 		
+		
+		
 		actions.add(new DoNothingAction());
 		actions.add(new QuitGame(actorLocations));
 
