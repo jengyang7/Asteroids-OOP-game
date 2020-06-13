@@ -81,10 +81,7 @@ Assignment 3
 	* if player or all humans killed, player loses
 		* override stillRunning method from World Class in GameWorld Subclass 
 	* if all zombies and Mamboo Marie have been wiped out, player wins 
-<<<<<<< HEAD
-	   
-=======
->>>>>>> branch 'master' of https://git.infotech.monash.edu/fit2099-s1-2020/OOPs/project.git
+
 
 
 Human, Player 
