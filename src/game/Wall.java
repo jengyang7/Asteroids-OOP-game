@@ -17,5 +17,6 @@ public class Wall extends Ground{
 	@Override
 	public boolean blocksThrownObjects() {
 		return true;
+
 	}
 }
