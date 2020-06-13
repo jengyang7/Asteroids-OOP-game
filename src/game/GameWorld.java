@@ -184,6 +184,7 @@ public class GameWorld extends World{
 		}
 		
 		return actorLocations.contains(player);
+		
 	}
 	
 	protected String endGameMessage() {
