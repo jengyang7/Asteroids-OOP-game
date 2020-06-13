@@ -86,7 +86,6 @@ Task
 	
 	Testing Functionality
 	5th May 2020
-	
 
 
 Agreement
