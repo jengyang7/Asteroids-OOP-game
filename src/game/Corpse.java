@@ -32,8 +32,14 @@ public class Corpse extends PortableItem {
 					location.addActor(new Zombie(actorName));		
 	
 				}else {
-					if (!location.getExits().isEmpty())
-						location.getExits().get(0).getDestination().addActor(new Zombie(actorName));
+					int x, y;
+						do {
+							x = (int) Math.floor(Math.random() * 20.0 + 30.0);
+							y = (int) Math.floor(Math.random() * 7.0 + 5.0);
+						} 
+						while (location.map().at(x, y).containsAnActor());
+						location.map().at(x,  y).addActor(new Zombie(name));	
+					
 	
 					}
 				}
