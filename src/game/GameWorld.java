@@ -63,7 +63,7 @@ public class GameWorld extends World{
 				if (stillRunning()) {
 					processActorTurn(actor);
 					
-					// Check if there is Llayer on the compound map then player lose
+					// Check if there is pLayer on the compound map then player lose
 					if (!gameMaps.get(0).contains(player)) {
 						display.println("Player loses");
 						gameOver = true;
@@ -121,6 +121,7 @@ public class GameWorld extends World{
 	protected void processActorTurn(Actor actor) {
 		Location here = actorLocations.locationOf(actor);
 		GameMap map = here.map();
+		
 
 		Actions actions = new Actions();
 		for (Item item : actor.getInventory()) {
@@ -148,6 +149,15 @@ public class GameWorld extends World{
 			actions.add(item.getPickUpAction());
 		}
 		
+		actions.add(new ShotgunNorth());
+		actions.add(new ShotgunSouth());
+		actions.add(new ShotgunEast());
+		actions.add(new ShotgunWest());
+		actions.add(new ShotgunNorthEast());
+		actions.add(new ShotgunNorthWest());
+		actions.add(new ShotgunSouthEast());
+		actions.add(new ShotgunSouthWest());
+		actions.add(new SniperActorChoice());
 		actions.add(new DoNothingAction());
 		actions.add(new QuitGame(actorLocations));
 
