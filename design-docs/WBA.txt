@@ -10,7 +10,7 @@ Work Breakdown Agreement
 
 Assignment 2
 Jeng Yang
-* Design and Implement Zombie Functionality
+* Design and Implement Zombie, Townhall, Mambo Marie, Game Over Functionality
    * Zombie attacks
       * zombie bite implementation
       * restore 5 health point for zombie when biting
@@ -24,9 +24,16 @@ Jeng Yang
 * Draw the Class Diagram
 
 Yung Sheng
-* Design and Implement Farmer and Human Functionality 
+* Design and Implement Farmer and Human, Shotgun Shooting, Sniper Shooting Functionality 
+	  * Player, Farmer and Human Farm Behaviour
       - Player harvest food, farmer sow, fertilize and harvest food
       - Player, Human pick up item behavior, action towards the item, such as changing zombie leg to zombie mace or zombie arm to zombie clubs.
+      - Human Heal after eating food Behaviour
+      *Shotgun
+       - Implemented shotgun bullet coordinates and damage done to actor in effected range
+      *Sniper
+       - Implemented sniper rifle sub-menu and actor target choice.
+     
 
 
 Assignment 3
