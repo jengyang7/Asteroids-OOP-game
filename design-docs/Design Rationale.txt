@@ -60,6 +60,28 @@ Beating up zombie
    * Create a new Corpse Class
    * override tick method in Corpse, after 5 turn Human Corpse become Zombie
 
+Assignment 3
+
+* Implement town level
+	* Create a new Town Map
+	* Create horse that Player can ride to town map
+		* moveactor method
+	* Old compound map continue move and act
+* Implement Mamboo Marie
+	* 5% chance of appearing on map
+		* find height and width of the compound map
+		* use Math Random to find the edge location on the map 
+	* born 5 new zombies every 10 turns
+		* use turn in chantingaction class to tracking turn
+	* if not killed, vanish after 30 turns 
+		* after 30 turn , remove Mamboo from map
+* Ending the game
+	* quit game option in the menu
+		* add a quitgame action to player actions
+	* if player or all humans killed, player loses
+		* override stillRunning method from World Class in GameWorld Subclass 
+	* if all zombies and Mamboo Marie have been wiped out, player wins 
+
 
 Human, Player 
 * Has behaviour of wandering and PickupBehaviour
@@ -135,3 +157,15 @@ Dirt
 * Boolean fertilised; indicate if the crop had been fertilised or not.;possible to be true if and only if crop is true and ripe is false.
 * After 20 turns the value of ripe will become true given that the boolean value of crop is true also. 
 * Reduce ripe turn by 10 if the farmer has fertilised it.
+
+Shotgun
+* Player can only shoot if a shotgun is found in their inventory
+* 8 direction will be given for a player to choose from the menu to shoot
+* All bullet coordinate will be calculated in ShotgunShooting Class
+* Actors in the bullet's coordinates wil be hit by the shotgun bullet as take damage
+* 70 damage for close range, 40 damage for medium range, 20 damage for long range
+
+Sniper
+* Player only can shoot a sniper if a Sniper Rifle is found in thier inventory
+* Player choose target to shoot from the whole map and all the shootable target will be listed on the menu
+* Player will then choose their aiming type from the menu after done choosing their target.
