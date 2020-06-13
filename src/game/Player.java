@@ -1,5 +1,7 @@
 package game;
 
+import java.util.List;
+
 import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actions;
 import edu.monash.fit2099.engine.Display;
@@ -36,8 +38,24 @@ public class Player extends Human {
 	
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
-		if (lastAction.getNextAction() != null)
+		List <Item> item = this.getInventory();
+		for(Item e: item) {
+			if (e.hasCapability(WeaponCapability.WEAPON) && e.toString() == "Shotgun"){
+				actions.add(new ShotgunNorth());
+				actions.add(new ShotgunSouth());
+				actions.add(new ShotgunEast());
+				actions.add(new ShotgunWest());
+				actions.add(new ShotgunNorthEast());
+				actions.add(new ShotgunNorthWest());
+				actions.add(new ShotgunSouthEast());
+				actions.add(new ShotgunSouthWest());
+				actions.add(new SniperActorChoice());
+				break;
+			}
+		}
+		if (lastAction.getNextAction() != null) {
 			return lastAction.getNextAction();
+		}
 		return menu.showMenu(this, actions, display);
 	}
 }

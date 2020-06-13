@@ -120,7 +120,7 @@ public class Application {
 		// place a simple weapon
 		gameMap.at(74, 20).addItem(new Plank());
 		town.at(20, 20).addItem(new Shotgun());
-		town.at(21, 21).addItem(new Shotgun());
+		town.at(21, 24).addItem(new Shotgun());
 		
 		
 		// FIXME: Add more zombies!

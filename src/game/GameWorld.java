@@ -149,15 +149,6 @@ public class GameWorld extends World{
 			actions.add(item.getPickUpAction());
 		}
 		
-		actions.add(new ShotgunNorth());
-		actions.add(new ShotgunSouth());
-		actions.add(new ShotgunEast());
-		actions.add(new ShotgunWest());
-		actions.add(new ShotgunNorthEast());
-		actions.add(new ShotgunNorthWest());
-		actions.add(new ShotgunSouthEast());
-		actions.add(new ShotgunSouthWest());
-		actions.add(new SniperActorChoice());
 		actions.add(new DoNothingAction());
 		actions.add(new QuitGame(actorLocations));
 
